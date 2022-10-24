@@ -13,6 +13,10 @@ const config = {
             type: "module",
         },
     },
+    externals: {
+        react: 'react',
+        reactDOM: 'react-dom'
+    },
     devtool: 'source-map',
     module: {
         rules: [
