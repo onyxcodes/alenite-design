@@ -1,0 +1,50 @@
+const path = require('path');
+
+const config = {
+    entry: './src/index.ts',
+    output: {
+        path: path.resolve(__dirname, 'lib'),
+        filename: '[name].js',
+        library: {
+            name: 'AleniteDesign',
+            type: 'umd',
+            umdNamedDefine: true,
+        },
+    },
+    devtool: 'source-map',
+    module: {
+        rules: [
+            {
+                test: /\.css$/i,
+                use: ['css-loader'],
+            },
+            {
+                test: /\.(ts|tsx)$/i,
+                loader: "ts-loader",
+                exclude: ['/node_modules/'],
+            },
+            {
+                test: /\.s[ac]ss$/i,
+                use: ['sass-loader'],
+            },
+        ]
+    },
+    resolve: {
+        extensions: [
+            '.js',
+            '.jsx',
+            '.tsx',
+            '.ts'
+        ],
+        alias: {
+            'styles': path.resolve(__dirname, "src/styles"),
+            'components': path.resolve(__dirname, "src/components"),
+            'hooks': path.resolve(__dirname, "src/hooks"),
+            'utils': path.resolve(__dirname, "src/utils"),
+        }
+    },
+};
+
+module.exports = () => {
+    return config;
+}
