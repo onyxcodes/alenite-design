@@ -3,13 +3,14 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const config = {
     entry: './src/index.ts',
+    experiments: {
+        outputModule: true,
+    },
     output: {
         path: path.resolve(__dirname, 'lib'),
-        filename: '[name].js',
+        filename: 'index.js',
         library: {
-            name: 'AleniteDesign',
-            type: 'umd',
-            umdNamedDefine: true,
+            type: "module",
         },
     },
     devtool: 'source-map',

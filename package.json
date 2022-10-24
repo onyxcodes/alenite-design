@@ -2,13 +2,13 @@
   "name": "alenite-design",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
     "prepare": "npm run build",
     "build": "webpack --node-env=production",
     "test": "jest"
   },
-  "types": "lib/index.js",
   "author": "Onyx Ganda <onyxganda@gmail.com> (https://onyxganda.com)",
   "contributors": [
     "Onyx Ganda <onyxganda@gmail.com> (https://onyxganda.com)"
