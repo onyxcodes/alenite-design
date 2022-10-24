@@ -1,0 +1,49 @@
+@use 'styles/vars';
+
+.actionbar-container {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+
+    &.primary {
+        background-color: vars.$primary-color;
+        color: white;
+    }
+
+    &.top {
+        align-self: top;
+    }
+
+    &.bottom {
+        align-self: bottom;
+    }
+
+    .actionbar-left,
+    .actionbar-right,
+    .actionbar-center {
+        align-items: center;
+        // TODO: Change accordingly to actionbar-container children number
+        min-width: 33%;
+        box-sizing: border-box;
+        align-items: center;
+        padding: 0 0.5rem;
+    }
+    .actionbar-left {
+        flex: 0.5;
+        display: flex;
+        justify-content: start;
+    }
+
+    .actionbar-center {
+        flex: 0.5;
+        display: flex;
+        place-content: center;
+    }
+
+    .actionbar-right {
+        flex: 0.5;
+        display: flex;
+        place-content: end;
+        margin-left: auto;
+    }
+}

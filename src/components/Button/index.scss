@@ -1,0 +1,60 @@
+@use '~styles/vars.scss';
+
+.btn {
+    padding: 0.25em 0.5em;
+    font-family: vars.$font-alt-heading;
+    // font-family: vars.$font-heading;
+    cursor: pointer;
+    // filter: drop-shadow(0.2rem 0.2rem 0.5rem rgba(0, 0, 0, 0.2));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    box-sizing: border-box;
+    width: fit-content;
+    &.btn-default {
+        border: solid thin vars.$secondary-color;
+        color: vars.$secondary-color-dark;
+        &:hover:not(.btn-disabled) {
+            background: vars.$secondary-color;
+        }
+        &.btn-disabled {
+            border: solid thin vars.$gray-color;
+            color: vars.$gray-color;
+        }
+    }
+
+    &.btn-primary {
+        border: solid thin vars.$primary-color;
+        background-color: vars.$primary-color;
+        color: vars.$light-color;
+        &:hover:not(.btn-disabled) {
+            background: vars.$primary-color-dark;
+            color: vars.$primary-color-light;
+        }
+        &.btn-disabled {
+            background: vars.$primary-color-light;
+            border: solid thin vars.$primary-color-light;
+            color: vars.$light-color;
+        }
+    }
+    
+    &.btn-text {
+        border: none;
+        color: vars.$primary-color;
+        border: solid thin transparent;
+        &:hover:not(.btn-disabled) {
+            border: solid thin vars.$primary-color;
+        }
+    }
+
+    &.btn-circle {
+        border-radius: 100%;
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+
+    &.btn-disabled {
+        cursor: not-allowed;
+    }
+}

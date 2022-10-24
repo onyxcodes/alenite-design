@@ -1,0 +1,42 @@
+@use './vars';
+@use './utils';
+
+@import './typography';
+@import './layers';
+@import './lists';
+@import './animations';
+@import './global';
+
+@include utils.google-font("Sora");
+@include utils.google-font("Fira+Mono:700");
+@include utils.google-font("Londrina+Solid");
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: vars.$bg-color;
+}
+
+body, #root, #app {
+  height: 100vh;
+  overflow: hidden;
+  #app {
+    // overflow: scroll;
+  }
+}
+
+main {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow-x: hidden;
+}
+
+.loading-logo {
+  width: 20em;
+}
