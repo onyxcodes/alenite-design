@@ -1,4 +1,5 @@
 const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const config = {
     entry: './src/index.ts',
@@ -25,10 +26,16 @@ const config = {
             },
             {
                 test: /\.s[ac]ss$/i,
-                use: ['sass-loader'],
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    {loader: 'css-loader', options: {modules: true}},
+                    'sass-loader'],
             },
         ]
     },
+    plugins: [
+        new MiniCssExtractPlugin(),
+      ],
     resolve: {
         extensions: [
             '.js',
