@@ -54,7 +54,9 @@ const Modal: React.FC<ModalProps> = ( props ) => {
                 ]}
             />
             {/* <Loader show={loading} /> */}
-            { <div className="modal-content"></div> }
+            { <div className="modal-content p1">
+                {children}
+            </div> }
             {btmActionBarItems && <ActionBar position="bottom"
                 items={[
                     ...(btmActionBarItems instanceof Function && btmActionBarItems() || btmActionBarItems instanceof Array && btmActionBarItems || [])
