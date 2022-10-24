@@ -28,7 +28,7 @@ const useSidebar = () => {
 
     // Alter the component to keep the props that will be passed
     // but the visibility will be managed from open, state and close
-    const _Sidebar = (props: SidebarProps ) => <Sidebar {...props} visible={state} closeSidebar={close}/>
+    const _Sidebar: React.FC<SidebarProps> = ( props ) => <Sidebar {...props} visible={state} closeSidebar={close}/>
 
     return { Sidebar: _Sidebar, state, open, close }
 }

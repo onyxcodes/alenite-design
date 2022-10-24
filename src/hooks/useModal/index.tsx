@@ -28,7 +28,7 @@ const useModal = () => {
 
     // Alter the component to keep the props that will be passed
     // but the visibility will be managed from open, state and close
-    const _Modal = (props: ModalProps ) => <Modal {...props} visible={state} closeModal={close}/>
+    const _Modal: React.FC<ModalProps> = ( props ) => <Modal {...props} visible={state} closeModal={close}/>
 
     return { Modal: _Modal, state, open, close }
 }
