@@ -1,3 +1,4 @@
+import React from 'react';
 import { ModalProps } from 'components/Modal';
 /**
  * Custom hook meant to export a Modal component and the methods to manage its state
@@ -5,7 +6,7 @@ import { ModalProps } from 'components/Modal';
  * Also to ease the management of the state from other components outside the Modal.
  */
 declare const useModal: () => {
-    Modal: (props: ModalProps) => JSX.Element;
+    Modal: React.FC<ModalProps>;
     state: boolean;
     open: () => void;
     close: () => void;
