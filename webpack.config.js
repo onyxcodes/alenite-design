@@ -22,31 +22,33 @@ const config = {
         rules: [
             {
                 test: /\.css$/i,
-                use: ['css-loader'],
+                use: [MiniCssExtractPlugin.loader,'css-loader'],
+            },
+            {
+                test: /\.s[ac]ss$/i,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    {loader: 'css-loader', options: {modules: false}},
+                    'sass-loader'
+                ],
             },
             {
                 test: /\.(ts|tsx)$/i,
                 loader: "ts-loader",
                 exclude: ['/node_modules/'],
             },
-            {
-                test: /\.s[ac]ss$/i,
-                use: [
-                    MiniCssExtractPlugin.loader,
-                    {loader: 'css-loader', options: {modules: true}},
-                    'sass-loader'],
-            },
         ]
     },
     plugins: [
         new MiniCssExtractPlugin(),
-      ],
+    ],
     resolve: {
         extensions: [
             '.js',
             '.jsx',
             '.tsx',
-            '.ts'
+            '.ts',
+            '.scss'
         ],
         alias: {
             'styles': path.resolve(__dirname, "src/styles"),
