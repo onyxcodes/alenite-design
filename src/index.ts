@@ -9,6 +9,8 @@ import Sidebar from './components/Sidebar';
 import ActionBar, {ActionBarItemConfig} from './components/ActionBar';
 import Alert from './components/Alert';
 
+import './styles/global.scss';
+
 import useModal from './hooks/useModal';
 import useSidebar from './hooks/useSidebar';
 
