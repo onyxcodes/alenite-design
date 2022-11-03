@@ -42,28 +42,29 @@ const TextInput = React.forwardRef( ( props: TextInputProps, ref: React.Forwarde
         current: inputRef.current
     }), [isInvalid]);
 
-    let inputClass = 'input-text f',
-        inputWrapperClass = 'input-wrapper m05 f';
+    let inputClass = 'alenite-input-text',
+        inputWrapperClass = 'input-wrapper';
 
-    if ( inline ) inputWrapperClass = `${inputWrapperClass} fd-row`;
-    else inputWrapperClass = `${inputWrapperClass} fd-col`;
+    if ( inline ) inputWrapperClass = `${inputWrapperClass} inline`;
 
     if ( required ) inputClass = `${inputClass} input-required`;
 
     if ( isInvalid.length ) inputClass = `${inputClass} input-invalid`;
 
     // Based on size assign classes
-    switch (size) {
-        case 's':
-            inputClass = `${inputClass} col-4 col-lg-8 col-sm-12`;
-        break;
-        case 'm':
-            inputClass = `${inputClass} col-8 col-sm-12`;
-        break;
-        case 'l':
-            inputClass = `${inputClass} col-12`;
-        break;
-    }
+    // switch (size) {
+    //     case 's':
+    //         inputClass = `${inputClass} col-4 col-lg-8 col-sm-12`;
+    //     break;
+    //     case 'm':
+    //         inputClass = `${inputClass} col-8 col-sm-12`;
+    //     break;
+    //     case 'l':
+    //         inputClass = `${inputClass} col-12`;
+    //     break;
+    // }
+
+    inputClass = `${inputClass} size-${size}`;
 
     const checkValidity = React.useCallback( () => {
         const value = inputRef?.current?.value;
@@ -113,7 +114,7 @@ const TextInput = React.forwardRef( ( props: TextInputProps, ref: React.Forwarde
                 placeholder={placeholder}
                 defaultValue={value}
             />
-            { isInvalid.length ? <ul className='input-errors my05 t6'>
+            { isInvalid.length ? <ul className='input-errors'>
                 { renderedErrors }
             </ul> : <></>}
         </div>

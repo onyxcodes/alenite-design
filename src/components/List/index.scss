@@ -1,5 +1,22 @@
-.list {
+@use '../../styles/layout';
+@use '../../styles/vars';
+
+.alenite-list {
+    @include vars.theme;
+    display: flex;
+    padding: 1rem;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
     justify-content: space-between;
     height: 100%;
+    .list-wrapper {
+        @include layout.column(9);
+        @include layout.column(12, lg);
+        .page-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+    }
 }

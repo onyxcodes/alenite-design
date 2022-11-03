@@ -57,7 +57,7 @@ const SearchBar: React.FC<SearchBarProps> = ( props ) => {
         }
     }, [query, onSearch])
     
-    return <div className='searchbar'>
+    return <div className='alenite-searchbar'>
         <TextInput type='text'
             ref={inputRef}
             // disabled={disabled} // TODO

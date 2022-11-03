@@ -1,6 +1,8 @@
-@use '~styles/vars';
+@use '../../styles/vars';
+@use '../../styles/typography';
 
-.alert {
+.alenite-alert {
+    @include vars.theme;
     position: absolute;
     box-shadow: 0 15px 20px rgba(0,0,0,.1);
     z-index: vars.$zindex-3;
@@ -22,14 +24,29 @@
         visibility:visible;
         opacity: 1;
     }
+    .alert-close {
+        float: right;
+        margin: 0.25rem;
+    }
     .alert-wrapper {
         min-height: 3rem;min-height: 4rem;
         box-sizing: border-box;
         min-width: 20rem;
+        display: flex;
+        flex-direction: row;
+        padding: 0.5rem;
         .alert-icon {
             border-left: solid;
+            display: flex;
+            align-items: center;
+            padding: 0.5rem;
         }
         .alert-content {
+            display: flex;
+            align-items: center;
+            padding-right: 0.5rem;
+            padding-left: 0.5rem;
+            @include typography.f6;
             .alert-buttons {
                 gap: 1rem;
                 flex-wrap: wrap;
@@ -40,7 +57,7 @@
     &.alert-warning, &.alert-debug {
         .alert-icon {
             color: vars.$warning-color;
-            border-color: vars.$warning-color;;
+            border-color: vars.$warning-color;
         }
     }
 

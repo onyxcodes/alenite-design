@@ -6,7 +6,9 @@ import Modal, { ModalProps } from 'components/Modal';
  * This allows to provide the Modal component with headers, footers or content that can already alter that state
  * Also to ease the management of the state from other components outside the Modal.
  */
-const useModal = () => {
+const useModal = (
+    areaId?: string
+) => {
     const [ state, setState ] = React.useState(false);
     
     /**
@@ -28,7 +30,7 @@ const useModal = () => {
 
     // Alter the component to keep the props that will be passed
     // but the visibility will be managed from open, state and close
-    const _Modal: React.FC<ModalProps> = ( props ) => <Modal {...props} visible={state} closeModal={close}/>
+    const _Modal: React.FC<ModalProps> = ( props ) => <Modal areaId={areaId} visible={state} closeModal={close} {...props}/>
 
     return { Modal: _Modal, state, open, close }
 }

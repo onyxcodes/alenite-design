@@ -47,11 +47,11 @@ const Select: React.FC<SelectProps> = ( props ) => {
         };
     }, [selected, dropdownRef]);
 
-    return <div className="dropdown">
-        { label && <label className="dropdown-label" htmlFor={name}>{label}</label>}
-        <div tabIndex={0} className="dropdown-select anim-pulse" ref={dropdownRef}>
+    return <div className='dropdown'>
+        { label && <label className='dropdown-label' htmlFor={name}>{label}</label>}
+        <div tabIndex={0} className='dropdown-select anim-pulse' ref={dropdownRef}>
             <span>{ selected?.label || 'Select...'}</span>
-            <div className="button"></div>
+            <div className='button'></div>
             <ul>
                 {options.map( (el, i) => <li 
                     key={i}

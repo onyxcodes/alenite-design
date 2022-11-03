@@ -1,13 +1,18 @@
-@use 'styles/vars';
+@use '../../styles/vars';
 
 .actionbar-container {
+    @include vars.theme;
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-
+    
     &.primary {
         background-color: vars.$primary-color;
         color: white;
+    }
+    &.secondary {
+        background-color: vars.$primary-color-light;
+        color: vars.$primary-color-dark;
     }
 
     &.top {

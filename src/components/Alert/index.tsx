@@ -25,7 +25,7 @@ const Alert: React.FC<AlertProps> = (props) => {
     const [mounted, mount] = React.useState(false);
     const [visibility, setVisibility] = React.useState(false);
 
-    let alertClass = 'alert';
+    let alertClass = 'alenite-alert';
     if (className) alertClass = `${alertClass} ${className}`;
 
     React.useLayoutEffect(() => {
@@ -60,14 +60,14 @@ const Alert: React.FC<AlertProps> = (props) => {
 
     return (mounted ? <>
         <div className={alertClass}>
-            {showClose && <Button onClick={closeAlert} className='f-right m025'
+            {showClose && <Button onClick={closeAlert} className='alert-close'
                 iconName='close' shape='circle' type='text'
             />}
-            <div className='alert-wrapper f fd-row p05'>
-                {<div className='alert-icon f aic p05'>
+            <div className='alert-wrapper'>
+                {<div className='alert-icon'>
                     {icon}
                 </div>}
-                <div className='alert-content f aic t6 px05'>
+                <div className='alert-content'>
                     {children}
                 </div>
             </div>

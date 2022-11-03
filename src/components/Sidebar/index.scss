@@ -1,9 +1,11 @@
-@use '~styles/utils.scss';
-@use '~styles/vars.scss';
+@use '../../styles/utils';
+@use '../../styles/vars';
+@use '../../styles/animations';
 
 $sidebar-width: calc(180px + 10vw);
 
 .sidebar {
+    @include vars.theme;
     .sidebar-bg {
         position: absolute;
         background-color: rgba(vars.$light-color, 0.75);
@@ -23,7 +25,7 @@ $sidebar-width: calc(180px + 10vw);
         width: 0;
         background: #fcfcfc;
         overflow-y: auto;
-        transition: all 0.5s cubic-bezier(.47, 1.64, .41, .8);
+        @include animations.transition-bounce();
         white-space: nowrap;
         overflow: hidden;
         -ms-scroll-limit: 0 0 0 0;

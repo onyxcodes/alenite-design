@@ -2,7 +2,8 @@ import React from 'react';
 import Icon from 'components/Icon';
 import './index.scss';
 
-interface ButtonProps {
+export interface ButtonProps {
+    name?: string;
     iconName?: string;
     title?: string;
     onClick?: (arg: any) => void;
@@ -12,9 +13,10 @@ interface ButtonProps {
     shape?: 'default' | 'circle';
     className?: string
 }
-// TODO: Add as property to enable specifying which html tag will be used for dom
+
 const Button: React.FC<ButtonProps> = ( props ) => {
-    const { 
+    const {
+        name,
         iconName,
         onClick,
         disabled = false,
@@ -25,17 +27,19 @@ const Button: React.FC<ButtonProps> = ( props ) => {
         className
     } = props;
 
-    let btnClass = `btn btn-${type} btn-${shape}`; 
+    let btnClass = `alenite-btn btn-${type} btn-${shape}`; 
     if ( className ) btnClass = `${btnClass} ${className}`;
     if ( disabled ) btnClass = `${btnClass} btn-disabled`;
     else btnClass = `${btnClass} anim-pulse`;
     
-    return(
-        <div title={title} onClick={onClick} className={btnClass}>
-            { iconName && <Icon name={iconName}/>}
-            { children }
-        </div>
-    )
+    return <div
+        role='button'
+        data-testid={name ? `button-${name}` : undefined}
+        title={title} onClick={onClick} className={btnClass}
+    >
+        { iconName && <Icon name={iconName}/>}
+        { children }
+    </div>
 }
 
 export default Button;

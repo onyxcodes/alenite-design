@@ -48,14 +48,17 @@ const List: React.FC<ListProps> = ( props ) => {
         return pages
     }
 
-    let listClass = `col-9 col-lg-12`;
+    let listClass = 'alenite-list',
+    // listWrapprerClass = `col-9 col-lg-12`;
+    listWrapprerClass = `list-wrapper`;
     
-    return <div className='list f p1 fd-col aic'>
+    return <div className={listClass}>
         { headerItems && <ActionBar position="top"
             items={headerItems || []}
         /> }
-        <div className={listClass}>
-            <div className='columns jcc'>
+        <div className={listWrapprerClass}>
+            <div className='page-container'>
+            {/* <div className='columns jcc'> */}
                 { infiniteScroll ? 
                     useInfinitePages(
                         data, pageSize,

@@ -1,50 +1,60 @@
-@use '~styles/vars.scss';
+@use '../../styles/vars';
+@use '../../styles/animations';
 
-.btn {
+.alenite-btn {
+    @include vars.theme;
     padding: 0.25em 0.5em;
-    font-family: vars.$font-alt-heading;
+    user-select: none;
+    font-family: vars.$font-body;
     // font-family: vars.$font-heading;
     cursor: pointer;
-    // filter: drop-shadow(0.2rem 0.2rem 0.5rem rgba(0, 0, 0, 0.2));
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 5px;
+    gap: 0.75rem;
+    height: 2.5rem;
+    border-radius: .25rem;
     box-sizing: border-box;
     width: fit-content;
+    &.anim-pulse {
+        @include animations.anim-pulse;
+    }
+
     &.btn-default {
-        border: solid thin vars.$secondary-color;
-        color: vars.$secondary-color-dark;
-        &:hover:not(.btn-disabled) {
-            background: vars.$secondary-color;
+        border: solid thin vars.$primary-color;
+        color: vars.$primary-color;
+        &:hover:not(.btn-disabled), &:focus:not(.btn-disabled) {
+            background-color: vars.$primary-color-light;
+            border: solid thin vars.$primary-color-light;
+            color: vars.$primary-color-dark;
         }
         &.btn-disabled {
-            border: solid thin vars.$gray-color;
-            color: vars.$gray-color;
+            filter: opacity(0.15);
         }
     }
 
     &.btn-primary {
         border: solid thin vars.$primary-color;
         background-color: vars.$primary-color;
-        color: vars.$light-color;
-        &:hover:not(.btn-disabled) {
-            background: vars.$primary-color-dark;
-            color: vars.$primary-color-light;
+        color: white;
+        &:hover:not(.btn-disabled), &:focus:not(.btn-disabled) {
+            border: solid thin vars.$primary-color-dark;
+            background-color: vars.$primary-color-dark;
+            color: white;
         }
         &.btn-disabled {
-            background: vars.$primary-color-light;
-            border: solid thin vars.$primary-color-light;
-            color: vars.$light-color;
+            filter: opacity(0.15);
         }
     }
     
     &.btn-text {
-        border: none;
         color: vars.$primary-color;
         border: solid thin transparent;
-        &:hover:not(.btn-disabled) {
+        &:hover:not(.btn-disabled), &:focus:not(.btn-disabled) {
             border: solid thin vars.$primary-color;
+        }
+        &.btn-disabled {
+            filter: opacity(0.15);
         }
     }
 

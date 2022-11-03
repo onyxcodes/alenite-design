@@ -14,7 +14,7 @@ export interface ActionBarItemConfig {
 export interface ActionBarProps {
     position: string;
     items: (ActionBarItemConfig | null)[];
-    type?: 'default' | 'primary';
+    type?: 'default' | 'primary' | 'secondary';
     className?: string;
 };
 
