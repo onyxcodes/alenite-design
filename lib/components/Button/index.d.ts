@@ -1,6 +1,7 @@
 import React from 'react';
 import './index.scss';
-interface ButtonProps {
+export interface ButtonProps {
+    name?: string;
     iconName?: string;
     title?: string;
     onClick?: (arg: any) => void;
