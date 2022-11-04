@@ -6,7 +6,7 @@ export type SelectOption = {
     value: string;
     selected?: boolean;
 }
-interface SelectProps {
+export interface SelectProps {
     options: SelectOption[];
     name: string;
     label?: string;
