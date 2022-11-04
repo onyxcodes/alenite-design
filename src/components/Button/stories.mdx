@@ -1,0 +1,74 @@
+import { Meta } from '@storybook/addon-docs';
+import Button from './';
+
+<Meta title='Commons/Button/Example'/>
+
+<style>
+.primaryHover {
+    
+}
+</style>
+
+<table>
+  <tr>
+    <th></th>
+    <th>Disabled</th>
+    <th>Normal</th>
+  </tr>
+  <tr>
+    <td>Primary</td>
+    <td><Button type='primary' disabled>Button</Button></td>
+    <td><Button type='primary'>Button</Button></td>
+  </tr>
+  {/* <tr>
+    <td>Secondary</td>
+    <td><Button type='secondary' disabled>Button</Button></td>
+    <td><Button type='secondary'>Button</Button></td>
+  </tr> */}
+  <tr>
+    <td>Default</td>
+    <td><Button type='default' disabled>Button</Button></td>
+    <td><Button type='default'>Button</Button></td>
+  </tr>
+  <tr>
+    <td>Text</td>
+    <td><Button type='text' disabled>Button</Button></td>
+    <td><Button type='text'>Button</Button></td>
+  </tr>
+</table> 
+
+## Icons
+<table>
+    <tr>
+        <th></th>
+        <th>Primary</th>
+        <th>Default</th>
+        <th>Text</th>
+    </tr>
+    <tr>
+        <td>Icon with text</td>
+        <td><Button iconName='close' type='primary' >Button</Button></td>
+        <td><Button iconName='close' type='default' >Button</Button></td>
+        <td><Button iconName='close' type='text' >Button</Button></td>
+    </tr>
+    <tr>
+    <td>Icon only</td>
+    <td><Button iconName='close' type='primary'/></td>
+    <td><Button iconName='close' type='default'/></td>
+    <td><Button iconName='close' type='text'/></td>
+    </tr>
+</table>
+
+### Shapes
+Icon only button supports circled shape
+<table>
+    <tr>
+        <td>Icon only</td>
+        <td><Button iconName='close' shape='circle' type='primary'/></td>
+        <td><Button iconName='close' shape='circle' type='default'/></td>
+        <td><Button iconName='close' shape='circle' type='text'/></td>
+    </tr>
+</table>
+
+## Sizes
+> TODO

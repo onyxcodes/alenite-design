@@ -1,7 +1,7 @@
 import React from 'react';
 import 'styles/icons.scss';
 
-interface IconProps {
+export interface IconProps {
     name: string
 }
 const Icon = ( props: IconProps ) => {
