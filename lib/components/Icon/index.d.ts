@@ -1,5 +1,5 @@
 import 'styles/icons.scss';
-interface IconProps {
+export interface IconProps {
     name: string;
 }
 declare const Icon: (props: IconProps) => JSX.Element;
