@@ -26,3 +26,10 @@ Text.args = {
     type: 'text',
     children: 'Button',
 };
+
+export const Icon = Template.bind({});
+Icon.args = {
+  type: 'primary',
+  iconName: 'info',
+  shape: 'circle',
+}
