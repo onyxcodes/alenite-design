@@ -13,14 +13,14 @@ type BaseButton = {
 }
 
 interface TextButton extends BaseButton {
-    shape: never;
+    shape?: never;
     children: string;
 }
 
 interface IconButton extends BaseButton {
     iconName: string;
     shape?: 'default' | 'circle';
-    children: never;
+    children?: never;
 }
 
 export type ButtonProps = TextButton | IconButton;
