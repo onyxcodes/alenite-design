@@ -25,7 +25,7 @@ const ActionBar: React.FC<ActionBarProps> = ( props ) => {
         type = 'default',
         className
     } = props;
-    let actionBarClass = `actionbar-container ${type} ${position} py05`;
+    let actionBarClass = `alenite-actionbar ${type} ${position} py05`;
 
     if (className) actionBarClass = `${actionBarClass} ${className}`;
 
