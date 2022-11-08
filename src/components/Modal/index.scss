@@ -1,7 +1,10 @@
 @use '../../styles/vars';
 
-.alenite-modal {
+:root {
     @include vars.theme;
+}
+
+.alenite-modal {
     display: none;
     position: absolute;
     top: 0;

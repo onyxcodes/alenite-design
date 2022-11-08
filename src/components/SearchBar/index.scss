@@ -1,7 +1,10 @@
 @use '../../styles/vars';
 
-.alenite-searchbar  {
+:root {
     @include vars.theme;
+}
+
+.alenite-searchbar  {
     display: flex;
     flex-direction: row;
     align-items: center;

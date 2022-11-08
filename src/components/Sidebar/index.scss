@@ -4,8 +4,11 @@
 
 $sidebar-width: calc(180px + 10vw);
 
-.sidebar {
+:root {
     @include vars.theme;
+}
+
+.sidebar {
     .sidebar-bg {
         position: absolute;
         background-color: rgba(vars.$light-color, 0.75);
