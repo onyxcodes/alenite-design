@@ -2,17 +2,28 @@ import React from 'react';
 import Icon from 'components/Icon';
 import './index.scss';
 
-export interface ButtonProps {
+type BaseButton = {
     name?: string;
     iconName?: string;
     title?: string;
     onClick?: (arg: any) => void;
     disabled?: boolean;
-    children?: string;
     type?: 'default' | 'primary' | 'text';
-    shape?: 'default' | 'circle';
     className?: string
 }
+
+interface TextButton extends BaseButton {
+    shape: never;
+    children: string;
+}
+
+interface IconButton extends BaseButton {
+    iconName: string;
+    shape?: 'default' | 'circle';
+    children: never;
+}
+
+export type ButtonProps = TextButton | IconButton;
 
 const Button: React.FC<ButtonProps> = ( props ) => {
     const {

@@ -5,19 +5,21 @@ import Button from 'components/Button';
 export interface AlertProps {
     onClose?: () => void;
     children?: React.ReactNode;
-    icon?: JSX.Element;
+    cover?: JSX.Element;
     visible?: boolean;
     closeAlert?: () => void;
     className?: string;
     showClose?: boolean;
+    rounded?: boolean;
 }
 const Alert: React.FC<AlertProps> = (props) => {
     const {
-        icon,
+        cover,
         visible = true,
         children,
         closeAlert,
         showClose = true,
+        rounded = true,
         onClose,
         className
     } = props;
@@ -26,6 +28,7 @@ const Alert: React.FC<AlertProps> = (props) => {
     const [visibility, setVisibility] = React.useState(false);
 
     let alertClass = 'alenite-alert';
+    if (rounded) alertClass = `${alertClass} rounded`;
     if (className) alertClass = `${alertClass} ${className}`;
 
     React.useLayoutEffect(() => {
@@ -64,8 +67,8 @@ const Alert: React.FC<AlertProps> = (props) => {
                 iconName='close' shape='circle' type='text'
             />}
             <div className='alert-wrapper'>
-                {<div className='alert-icon'>
-                    {icon}
+                {cover && <div className='alert-cover'>
+                    {cover}
                 </div>}
                 <div className='alert-content'>
                     {children}
