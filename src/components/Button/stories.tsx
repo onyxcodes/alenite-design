@@ -5,6 +5,11 @@ import Button from './';
 export default {
   title: 'Commons/Button',
   component: Button,
+  argTypes: {
+    accent: { control: 'color' },
+    accentDark: { control: 'color' },
+    accentLight: { control: 'color' },
+  }
 } as ComponentMeta<typeof Button>;
 
 const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />;
@@ -17,14 +22,14 @@ Default.args = {
 
 export const Primary = Template.bind({});
 Primary.args = {
-    type: 'primary',
-    children: 'Button',
+  type: 'primary',
+  children: 'Button',
 };
 
 export const Text = Template.bind({});
 Text.args = {
-    type: 'text',
-    children: 'Button',
+  type: 'text',
+  children: 'Button',
 };
 
 export const Icon = Template.bind({});
