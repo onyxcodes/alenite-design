@@ -1,27 +1,45 @@
 import React from 'react';
 import './index.scss';
 import Button from 'components/Button';
+import ComponentProps from 'components/Component';
+import { accentStyle } from 'utils/colors';
 
-export interface AlertProps {
+interface AlertBaseProps extends ComponentProps {
     onClose?: () => void;
-    children?: React.ReactNode;
     cover?: JSX.Element;
     visible?: boolean;
     closeAlert?: () => void;
-    className?: string;
     showClose?: boolean;
     rounded?: boolean;
 }
+
+interface AlertCustomProps extends AlertBaseProps {
+    children?: React.ReactNode;
+    message?: never;
+    action?: never;
+}
+
+interface AlertSimpleProps extends AlertBaseProps {
+    children?: never;
+    message: string;
+    action?: JSX.Element[];
+}
+
+export type AlertProps = AlertSimpleProps | AlertCustomProps;
+
 const Alert: React.FC<AlertProps> = (props) => {
     const {
         cover,
         visible = true,
-        children,
         closeAlert,
         showClose = true,
         rounded = true,
         onClose,
-        className
+        children,
+        message,
+        action,
+        className,
+        accent, accentDark, accentLight
     } = props;
 
     const [mounted, mount] = React.useState(false);
@@ -29,6 +47,10 @@ const Alert: React.FC<AlertProps> = (props) => {
 
     let alertClass = 'alenite-alert';
     if (rounded) alertClass = `${alertClass} rounded`;
+
+    let style: {[key: string]: any} = {};
+    style = Object.assign(style, accentStyle({accent, accentLight, accentDark}));
+
     if (className) alertClass = `${alertClass} ${className}`;
 
     React.useLayoutEffect(() => {
@@ -61,8 +83,19 @@ const Alert: React.FC<AlertProps> = (props) => {
         }
     }, [mounted]);
 
+    // Display the content as provided children or format message and action
+    const content = children ? children : <>
+        <div className='message'>
+            {message}
+        </div>
+        { action && <div className='action'>{action}</div> }
+    </>
+
     return (mounted ? <>
-        <div className={alertClass}>
+        <div
+            className={alertClass}
+            style={style}
+        >
             {showClose && <Button onClick={closeAlert} className='alert-close'
                 iconName='close' shape='circle' type='text'
             />}
@@ -71,7 +104,7 @@ const Alert: React.FC<AlertProps> = (props) => {
                     {cover}
                 </div>}
                 <div className='alert-content'>
-                    {children}
+                    {content}
                 </div>
             </div>
         </div>

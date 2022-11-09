@@ -4,12 +4,12 @@ import './index.scss';
 import TextInput from 'components/Form/TextInput';
 import { InputRefType } from 'components/Form/types';
 import Button from 'components/Button';
-
+import ComponentProps from 'components/Component';
 // TODO: Consider the creation and usage of a Form.SearchInput
 // instead of Form.TextInput. The idea is to better integrate 
 // the button inside the input component tree
 
-interface SearchBarProps {
+interface SearchBarProps extends ComponentProps {
     disabled?: boolean;
     placeholder?: string;
     value?: string;
@@ -20,8 +20,13 @@ const SearchBar: React.FC<SearchBarProps> = ( props ) => {
         disabled = false,
         placeholder = 'Search',
         value = '',
-        onSearch
+        onSearch,
+        className,
+        accent, accentDark, accentLight,
     } = props;
+
+    let searchbarClass = 'alenite-searchbar';
+    if (className) searchbarClass = `${searchbarClass} ${className}`;
 
     const inputRef = React.useRef<InputRefType | null>(null)
     const [ query, setQuery ] = React.useState<string | undefined>(value);
@@ -57,7 +62,7 @@ const SearchBar: React.FC<SearchBarProps> = ( props ) => {
         }
     }, [query, onSearch])
     
-    return <div className='alenite-searchbar'>
+    return <div className={searchbarClass}>
         <TextInput type='text'
             ref={inputRef}
             // disabled={disabled} // TODO
@@ -67,8 +72,18 @@ const SearchBar: React.FC<SearchBarProps> = ( props ) => {
             placeholder={placeholder}
             onChange={prepareSearch}
             onPressEnter={doSearch}
+            accent={accent}
+            accentDark={accentDark}
+            accentLight={accentLight}
         />
-        <Button iconName='search' onClick={doSearch} disabled={btnDisabled}/>
+        <Button
+            iconName='search'
+            onClick={doSearch}
+            disabled={btnDisabled}
+            accent={accent}
+            accentDark={accentDark}
+            accentLight={accentLight}
+        />
     </div>
 }
 
