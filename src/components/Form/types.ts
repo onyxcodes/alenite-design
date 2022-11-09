@@ -1,4 +1,6 @@
-export type InputProps = {
+import ComponentProps from 'components/Component';
+
+export interface InputProps extends ComponentProps {
     name: string;
     label?: string;
     placeholder?: string;

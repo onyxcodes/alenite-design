@@ -1,7 +1,9 @@
 import './index.scss';
 
 import ActionBarSection from './ActionBarSection';
+import ComponentProps from 'components/Component';
 
+import { accentStyle } from 'utils/colors';
 export interface ActionBarItemConfig {
     item: JSX.Element;
     position: "left" | "center" | "right";
@@ -11,11 +13,10 @@ export interface ActionBarItemConfig {
     alt?: JSX.Element;
 }
 
-export interface ActionBarProps {
+export interface ActionBarProps extends ComponentProps {
     position: string;
     items: (ActionBarItemConfig | null)[];
     type?: 'default' | 'primary' | 'secondary';
-    className?: string;
 };
 
 const ActionBar: React.FC<ActionBarProps> = ( props ) => {
@@ -23,15 +24,20 @@ const ActionBar: React.FC<ActionBarProps> = ( props ) => {
         position ='top',
         items,
         type = 'default',
+        accent, accentLight, accentDark,
         className
     } = props;
-    let actionBarClass = `actionbar-container ${type} ${position} py05`;
+    let actionBarClass = `alenite-actionbar ${type} ${position}`;
 
+    let style: {[key: string]: any} = {};
+    style = Object.assign(style, accentStyle({accent, accentLight, accentDark}));
+    
     if (className) actionBarClass = `${actionBarClass} ${className}`;
 
     return (
         <div 
             className={actionBarClass}
+            style={style}
         >
             <ActionBarSection type='left' items={items} />
             <ActionBarSection type='center' items={items} />

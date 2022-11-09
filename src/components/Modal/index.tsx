@@ -3,13 +3,15 @@ import './index.scss';
 import ActionBar, { ActionBarItemConfig } from 'components/ActionBar';
 import Button from 'components/Button';
 import ReactDOM from 'react-dom';
+import ComponentProps from 'components/Component';
 
-export interface ModalProps {
+export interface ModalProps extends ComponentProps {
     areaId?: string;
     title?: string;
     children?: React.ReactNode;
     visible?: boolean;
     closeModal?: () => void;
+    showClose?: boolean;
     topActionBarItems?: ActionBarItemConfig[] | (() => ActionBarItemConfig[]);
     btmActionBarItems?: ActionBarItemConfig[] | (() => ActionBarItemConfig[]);
 };
@@ -21,14 +23,18 @@ const Modal: React.FC<ModalProps> = (props) => {
         children,
         visible = false,
         topActionBarItems, btmActionBarItems,
-        closeModal
+        closeModal,
+        showClose = true,
+        className,
+        accent, accentDark, accentLight,
     } = props;
 
     let modalClass = 'alenite-modal';
 
     if (visible) modalClass = `${modalClass} visible`;
+    if (className) modalClass = `${modalClass} ${className}`;
 
-    let modalFgClass = 'modal-fg r05'; // The modal
+    let modalFgClass = 'modal-fg'; // The modal
     let modalBgClass = 'modal-bg'; // Mask
 
     const modalArea = areaId ? document.getElementById(areaId) : undefined;
@@ -40,15 +46,19 @@ const Modal: React.FC<ModalProps> = (props) => {
                 items={[
                     title ? { item: <span>{title}</span>, position: 'center', key: 'modal-title', scale: false } : null,
                     ...(topActionBarItems instanceof Function && topActionBarItems() || topActionBarItems instanceof Array && topActionBarItems || []),
-                    {
-                        item: <Button shape='circle' type='text' onClick={closeModal} iconName='close' />,
+                    showClose ? {
+                        item: <Button
+                            shape='circle' type='text'
+                            onClick={closeModal} iconName='close'
+                            accent={accent} accentDark={accentDark} accentLight={accentLight}
+                        />,
                         position: 'right',
                         title: 'Close',
                         key: 'close-modal'
-                    }
+                    } : null
                 ]}
             />
-            {<div className='modal-content p1'>
+            {<div className='modal-content'>
                 {children}
             </div>}
             {btmActionBarItems && <ActionBar position='bottom'
