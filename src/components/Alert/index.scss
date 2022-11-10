@@ -1,4 +1,5 @@
 @use '../../styles/vars';
+@use '../../styles/utils';
 @use '../../styles/typography';
 
 :root {
@@ -34,29 +35,27 @@
     .alert-wrapper {
         min-height: 4rem;
         box-sizing: border-box;
-        min-width: 20rem;
-        display: flex;
+        // min-width: 20rem;
+        display: grid;
+        grid-template-columns: minmax(4rem,auto) auto;
+        justify-items: stretch;
+        padding: .5rem;
+        grid-column-gap: .5rem;
         .alert-cover {
-            display: flex;
-            align-items: center;
-            width: 64px;
             background-color: var(--color-primary);
             color: white;
-            justify-content: center;
             box-sizing: border-box;
-            flex-shrink: 0;
+            aspect-ratio: 1;
+            height: 4rem;
+            place-self: center;
             overflow: hidden;
-            & > img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         .alert-content {
             display: flex;
             align-items: center;
-            padding: 0.5rem;
-            width: 100%;
             gap: 1rem;
             @include typography.f6;
             .message {
@@ -66,6 +65,7 @@
                 display: flex;
                 gap: 1rem;
                 flex-wrap: wrap;
+                align-items: center;
             }
         }
     }

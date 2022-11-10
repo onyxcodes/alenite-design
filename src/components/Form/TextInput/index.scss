@@ -28,17 +28,22 @@
         margin-left: .5rem;
         width: 100%;
         flex-direction: column;
+        gap: .5rem;
         &.inline {
+            align-items: center;
             flex-direction: row;
+            gap: 1rem;
         }
         .input-text-label {
             position: relative;
+            font-family: vars.$font-body;
         }
         input {
             padding: 0.5rem 1rem;
             font-size: inherit;
             border: solid thin grey;
-            width: 100%;
+            // width: 100%;
+            flex: 1;
             &:focus-visible {
                 outline: 2px solid vars.$primary-color;
             }

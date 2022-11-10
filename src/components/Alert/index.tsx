@@ -84,11 +84,22 @@ const Alert: React.FC<AlertProps> = (props) => {
     }, [mounted]);
 
     // Display the content as provided children or format message and action
-    const content = children ? children : <>
+    const content = children ? 
+        <>
+            {children}
+            {showClose && <div className='action'><Button onClick={closeAlert} className='alert-close'
+                iconName='close' shape='circle' type='text'
+            /></div>}
+        </> : <>
         <div className='message'>
             {message}
         </div>
-        { action && <div className='action'>{action}</div> }
+        { (action || showClose) ? <div className='action'>
+            {action}
+            {showClose && <Button onClick={closeAlert} className='alert-close'
+                iconName='close' shape='circle' type='text'
+            />}
+        </div> : null }
     </>
 
     return (mounted ? <>
@@ -96,9 +107,6 @@ const Alert: React.FC<AlertProps> = (props) => {
             className={alertClass}
             style={style}
         >
-            {showClose && <Button onClick={closeAlert} className='alert-close'
-                iconName='close' shape='circle' type='text'
-            />}
             <div className='alert-wrapper'>
                 {cover && <div className='alert-cover'>
                     {cover}
@@ -108,7 +116,7 @@ const Alert: React.FC<AlertProps> = (props) => {
                 </div>
             </div>
         </div>
-    </> : <></>);
+    </> : null);
 }
 
 export default Alert;

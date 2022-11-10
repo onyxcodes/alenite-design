@@ -98,7 +98,6 @@ const TextInput = React.forwardRef( ( props: TextInputProps, ref: React.Forwarde
     return <div
         className={inputClass}
         style={style}
-        role='textbox'
     >
         <div className={inputWrapperClass}>
             { label && 
@@ -111,6 +110,9 @@ const TextInput = React.forwardRef( ( props: TextInputProps, ref: React.Forwarde
                 onKeyUp={onKeyUp}
                 placeholder={placeholder}
                 defaultValue={value}
+                required={required}
+                role='textbox'
+                aria-required={required}
             />
             { isInvalid.length ? <ul className='input-errors'>
                 { renderedErrors }
