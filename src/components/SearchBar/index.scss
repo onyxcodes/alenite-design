@@ -1,9 +1,5 @@
 @use '../../styles/vars';
 
-:root {
-    @include vars.theme;
-}
-
 .alenite-searchbar  {
     display: flex;
     flex-direction: row;

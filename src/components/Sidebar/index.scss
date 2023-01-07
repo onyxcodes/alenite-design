@@ -4,10 +4,6 @@
 
 $sidebar-width: calc(180px + 10vw);
 
-:root {
-    @include vars.theme;
-}
-
 .sidebar {
     .sidebar-bg {
         position: absolute;

@@ -3,7 +3,7 @@ import './index.scss';
 import ActionBar, { ActionBarItemConfig } from 'components/ActionBar';
 import Button from 'components/Button';
 import ReactDOM from 'react-dom';
-import ComponentProps from 'components/Component';
+import ComponentProps from '../Component';
 
 export interface ModalProps extends ComponentProps {
     areaId?: string;

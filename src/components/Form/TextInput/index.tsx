@@ -1,8 +1,7 @@
 import React from 'react';
 import './index.scss';
-import { accentStyle } from 'utils/colors';
-import { InputProps, InputRefType } from 'components/Form/types';
-
+import { setAccentStyle } from 'utils/colors';
+import { InputProps, InputRefType } from '../types';
 export interface TextInputProps extends InputProps {
     // TODO: Extend with other compatible types
     type: 'text' | 'email';
@@ -93,7 +92,7 @@ const TextInput = React.forwardRef( ( props: TextInputProps, ref: React.Forwarde
     ), [isInvalid]);
 
     let style: {[key: string]: any} = {};
-    style = Object.assign(style, accentStyle({accent, accentLight, accentDark}));
+    style = setAccentStyle(style, {accent, accentLight, accentDark});
 
     return <div
         className={inputClass}

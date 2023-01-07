@@ -1,6 +1,6 @@
 import React from 'react';
-import ComponentProps from 'components/Component';
-import { accentStyle } from 'utils/colors';
+import ComponentProps from '../../Component';
+import { setAccentStyle } from 'utils/colors';
 import './index.scss';
     
 export type SelectOption = {
@@ -51,7 +51,7 @@ const Select: React.FC<SelectProps> = ( props ) => {
     }, [selectRef]);
 
     let style: {[key: string]: any} = {};
-    style = Object.assign(style, accentStyle({accent, accentLight, accentDark}));
+    style = setAccentStyle(style, {accent, accentLight, accentDark});
 
     let selectClass = 'alenite-select';
     if (className) selectClass = `${selectClass} ${className}`;
