@@ -1,23 +1,23 @@
 import React from 'react';
+import ComponentProps from '../Component';
 import './index.scss';
-declare type BaseButton = {
+interface BaseButtonProps extends ComponentProps {
     name?: string;
     iconName?: string;
     title?: string;
     onClick?: (arg: any) => void;
     disabled?: boolean;
     type?: 'default' | 'primary' | 'text';
-    className?: string;
-};
-interface TextButton extends BaseButton {
+}
+interface TextButtonProps extends BaseButtonProps {
     shape?: never;
     children: string;
 }
-interface IconButton extends BaseButton {
+interface IconButtonProps extends BaseButtonProps {
     iconName: string;
     shape?: 'default' | 'circle';
     children?: never;
 }
-export declare type ButtonProps = TextButton | IconButton;
+export declare type ButtonProps = TextButtonProps | IconButtonProps;
 declare const Button: React.FC<ButtonProps>;
 export default Button;

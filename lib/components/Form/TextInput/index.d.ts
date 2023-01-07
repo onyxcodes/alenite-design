@@ -1,6 +1,6 @@
 import React from 'react';
 import './index.scss';
-import { InputProps, InputRefType } from 'components/Form/types';
+import { InputProps, InputRefType } from '../types';
 export interface TextInputProps extends InputProps {
     type: 'text' | 'email';
     onPressEnter?: (arg?: string | null) => void;

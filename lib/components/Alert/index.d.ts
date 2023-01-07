@@ -1,14 +1,24 @@
 import React from 'react';
 import './index.scss';
-export interface AlertProps {
+import ComponentProps from '../Component';
+interface AlertBaseProps extends ComponentProps {
     onClose?: () => void;
-    children?: React.ReactNode;
     cover?: JSX.Element;
     visible?: boolean;
     closeAlert?: () => void;
-    className?: string;
     showClose?: boolean;
     rounded?: boolean;
 }
+interface AlertCustomProps extends AlertBaseProps {
+    children?: React.ReactNode;
+    message?: never;
+    action?: never;
+}
+interface AlertSimpleProps extends AlertBaseProps {
+    children?: never;
+    message: string;
+    action?: JSX.Element[];
+}
+export declare type AlertProps = AlertSimpleProps | AlertCustomProps;
 declare const Alert: React.FC<AlertProps>;
 export default Alert;
