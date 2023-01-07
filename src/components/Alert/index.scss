@@ -1,6 +1,12 @@
-@use '~styles/vars';
+@use '../../styles/vars';
+@use '../../styles/utils';
+@use '../../styles/typography';
 
-.alert {
+:root {
+    @include vars.theme;
+}
+
+.alenite-alert {
     position: absolute;
     box-shadow: 0 15px 20px rgba(0,0,0,.1);
     z-index: vars.$zindex-3;
@@ -22,39 +28,52 @@
         visibility:visible;
         opacity: 1;
     }
+    .alert-close {
+        float: right;
+        margin: 0.25rem;
+    }
     .alert-wrapper {
-        min-height: 3rem;min-height: 4rem;
+        min-height: 4rem;
         box-sizing: border-box;
-        min-width: 20rem;
-        .alert-icon {
-            border-left: solid;
+        // min-width: 20rem;
+        display: grid;
+        grid-template-columns: minmax(4rem,auto) auto;
+        justify-items: stretch;
+        padding: .5rem;
+        grid-column-gap: .5rem;
+        .alert-cover {
+            background-color: var(--color-primary);
+            color: white;
+            box-sizing: border-box;
+            aspect-ratio: 1;
+            height: 4rem;
+            place-self: center;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         .alert-content {
-            .alert-buttons {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            @include typography.f6;
+            .message {
+                flex: 1;
+            }
+            .action {
+                display: flex;
                 gap: 1rem;
                 flex-wrap: wrap;
+                align-items: center;
             }
         }
     }
 
-    &.alert-warning, &.alert-debug {
-        .alert-icon {
-            color: vars.$warning-color;
-            border-color: vars.$warning-color;;
-        }
-    }
-
-    &.alert-error {
-        .alert-icon {
-            color: vars.$error-color;
-            border-color: vars.$error-color;
-        }
-    }
-
-    &.alert-prompt {
-        .alert-icon {
-            color: vars.$primary-color;
-            border-color: vars.$primary-color;
+    &.rounded {
+        border-radius: .75rem;
+        .alert-wrapper .alert-cover {
+            border-radius: .75rem;
         }
     }
     

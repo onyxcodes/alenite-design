@@ -1,8 +1,7 @@
 import React from 'react';
 import './index.scss';
-
-import { InputProps, InputRefType } from 'components/Form/types';
-
+import { setAccentStyle } from 'utils/colors';
+import { InputProps, InputRefType } from '../types';
 export interface TextInputProps extends InputProps {
     // TODO: Extend with other compatible types
     type: 'text' | 'email';
@@ -24,7 +23,9 @@ const TextInput = React.forwardRef( ( props: TextInputProps, ref: React.Forwarde
         placeholder,
         inline = false,
         labelSeparator = ':',
-        value
+        value,
+        className,
+        accent, accentDark, accentLight,
     } = props;
     
     const inputRef = React.useRef<HTMLInputElement>(null);
@@ -42,28 +43,18 @@ const TextInput = React.forwardRef( ( props: TextInputProps, ref: React.Forwarde
         current: inputRef.current
     }), [isInvalid]);
 
-    let inputClass = 'input-text f',
-        inputWrapperClass = 'input-wrapper m05 f';
+    let inputClass = 'alenite-input-text',
+        inputWrapperClass = 'input-wrapper';
 
-    if ( inline ) inputWrapperClass = `${inputWrapperClass} fd-row`;
-    else inputWrapperClass = `${inputWrapperClass} fd-col`;
+    if (className) inputClass = `${inputClass} ${className}`;
+
+    if ( inline ) inputWrapperClass = `${inputWrapperClass} inline`;
 
     if ( required ) inputClass = `${inputClass} input-required`;
 
     if ( isInvalid.length ) inputClass = `${inputClass} input-invalid`;
 
-    // Based on size assign classes
-    switch (size) {
-        case 's':
-            inputClass = `${inputClass} col-4 col-lg-8 col-sm-12`;
-        break;
-        case 'm':
-            inputClass = `${inputClass} col-8 col-sm-12`;
-        break;
-        case 'l':
-            inputClass = `${inputClass} col-12`;
-        break;
-    }
+    inputClass = `${inputClass} size-${size}`;
 
     const checkValidity = React.useCallback( () => {
         const value = inputRef?.current?.value;
@@ -100,7 +91,13 @@ const TextInput = React.forwardRef( ( props: TextInputProps, ref: React.Forwarde
         <li key={i}>{ typeof err === 'string' ? err : 'Check this field' }</li>
     ), [isInvalid]);
 
-    return <div className={inputClass}>
+    let style: {[key: string]: any} = {};
+    style = setAccentStyle(style, {accent, accentLight, accentDark});
+
+    return <div
+        className={inputClass}
+        style={style}
+    >
         <div className={inputWrapperClass}>
             { label && 
                 <label className='input-text-label' htmlFor={name}>{`${label}${labelSeparator}`}</label>
@@ -112,8 +109,11 @@ const TextInput = React.forwardRef( ( props: TextInputProps, ref: React.Forwarde
                 onKeyUp={onKeyUp}
                 placeholder={placeholder}
                 defaultValue={value}
+                required={required}
+                role='textbox'
+                aria-required={required}
             />
-            { isInvalid.length ? <ul className='input-errors my05 t6'>
+            { isInvalid.length ? <ul className='input-errors'>
                 { renderedErrors }
             </ul> : <></>}
         </div>

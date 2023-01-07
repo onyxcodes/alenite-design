@@ -1,7 +1,6 @@
-import React from 'react';
-import 'styles/icomoon.css';
-interface IconProps {
+import 'styles/icons.scss';
+export interface IconProps {
     name: string;
 }
-declare const Icon: React.FC<IconProps>;
+declare const Icon: (props: IconProps) => JSX.Element;
 export default Icon;

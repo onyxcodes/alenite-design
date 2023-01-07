@@ -1,31 +1,56 @@
 import React from 'react';
 import './index.scss';
 import Button from 'components/Button';
+import ComponentProps from '../Component';
+import { setAccentStyle } from 'utils/colors';
 
-export interface AlertProps {
+interface AlertBaseProps extends ComponentProps {
     onClose?: () => void;
-    children?: React.ReactNode;
-    icon?: JSX.Element;
+    cover?: JSX.Element;
     visible?: boolean;
     closeAlert?: () => void;
-    className?: string;
     showClose?: boolean;
+    rounded?: boolean;
 }
+
+interface AlertCustomProps extends AlertBaseProps {
+    children?: React.ReactNode;
+    message?: never;
+    action?: never;
+}
+
+interface AlertSimpleProps extends AlertBaseProps {
+    children?: never;
+    message: string;
+    action?: JSX.Element[];
+}
+
+export type AlertProps = AlertSimpleProps | AlertCustomProps;
+
 const Alert: React.FC<AlertProps> = (props) => {
     const {
-        icon,
+        cover,
         visible = true,
-        children,
         closeAlert,
         showClose = true,
+        rounded = true,
         onClose,
-        className
+        children,
+        message,
+        action,
+        className,
+        accent, accentDark, accentLight
     } = props;
 
     const [mounted, mount] = React.useState(false);
     const [visibility, setVisibility] = React.useState(false);
 
-    let alertClass = 'alert';
+    let alertClass = 'alenite-alert';
+    if (rounded) alertClass = `${alertClass} rounded`;
+
+    let style: {[key: string]: any} = {};
+    style = setAccentStyle(style, {accent, accentLight, accentDark});
+
     if (className) alertClass = `${alertClass} ${className}`;
 
     React.useLayoutEffect(() => {
@@ -58,21 +83,40 @@ const Alert: React.FC<AlertProps> = (props) => {
         }
     }, [mounted]);
 
-    return (mounted ? <>
-        <div className={alertClass}>
-            {showClose && <Button onClick={closeAlert} className='f-right m025'
+    // Display the content as provided children or format message and action
+    const content = children ? 
+        <>
+            {children}
+            {showClose && <div className='action'><Button onClick={closeAlert} className='alert-close'
+                iconName='close' shape='circle' type='text'
+            /></div>}
+        </> : <>
+        <div className='message'>
+            {message}
+        </div>
+        { (action || showClose) ? <div className='action'>
+            {action}
+            {showClose && <Button onClick={closeAlert} className='alert-close'
                 iconName='close' shape='circle' type='text'
             />}
-            <div className='alert-wrapper f fd-row p05'>
-                {<div className='alert-icon f aic p05'>
-                    {icon}
+        </div> : null }
+    </>
+
+    return (mounted ? <>
+        <div
+            className={alertClass}
+            style={style}
+        >
+            <div className='alert-wrapper'>
+                {cover && <div className='alert-cover'>
+                    {cover}
                 </div>}
-                <div className='alert-content f aic t6 px05'>
-                    {children}
+                <div className='alert-content'>
+                    {content}
                 </div>
             </div>
         </div>
-    </> : <></>);
+    </> : null);
 }
 
 export default Alert;

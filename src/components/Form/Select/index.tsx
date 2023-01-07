@@ -1,4 +1,6 @@
 import React from 'react';
+import ComponentProps from '../../Component';
+import { setAccentStyle } from 'utils/colors';
 import './index.scss';
     
 export type SelectOption = {
@@ -6,14 +8,21 @@ export type SelectOption = {
     value: string;
     selected?: boolean;
 }
-interface SelectProps {
+export interface SelectProps extends ComponentProps {
     options: SelectOption[];
     name: string;
     label?: string;
     onChange?: ( arg: SelectOption ) => void;
 }
 const Select: React.FC<SelectProps> = ( props ) => {
-    const { options, name, label, onChange } = props;
+    const {
+        options,
+        name,
+        label,
+        onChange,
+        className,
+        accent, accentLight, accentDark
+    } = props;
     const [ selected, setSelected ] = React.useState<SelectOption | undefined>(
         // TODO: Add warning or error when found more than an option with same value
         options.filter( el => el.selected )[0]
@@ -41,17 +50,26 @@ const Select: React.FC<SelectProps> = ( props ) => {
         dropdownRef.current?.blur();
     }, [selectRef]);
 
+    let style: {[key: string]: any} = {};
+    style = setAccentStyle(style, {accent, accentLight, accentDark});
+
+    let selectClass = 'alenite-select';
+    if (className) selectClass = `${selectClass} ${className}`;
+
     React.useEffect( () => {
         if ( selected && onChange ) {
             onChange(selected)
         };
     }, [selected, dropdownRef]);
 
-    return <div className="dropdown">
-        { label && <label className="dropdown-label" htmlFor={name}>{label}</label>}
-        <div tabIndex={0} className="dropdown-select anim-pulse" ref={dropdownRef}>
+    return <div 
+        className={selectClass}
+        style={style}
+    >
+        { label && <label className='dropdown-label' htmlFor={name}>{label}</label>}
+        <div tabIndex={0} className='dropdown-select anim-pulse' ref={dropdownRef}>
             <span>{ selected?.label || 'Select...'}</span>
-            <div className="button"></div>
+            <div className='button'></div>
             <ul>
                 {options.map( (el, i) => <li 
                     key={i}

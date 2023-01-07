@@ -1,6 +1,7 @@
 import React from 'react';
 import './index.scss';
-interface SearchBarProps {
+import ComponentProps from '../Component';
+interface SearchBarProps extends ComponentProps {
     disabled?: boolean;
     placeholder?: string;
     value?: string;

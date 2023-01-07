@@ -1,5 +1,6 @@
-.searchbar  {
-    // TODO: move to jsx reusable classes
+@use '../../styles/vars';
+
+.alenite-searchbar  {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -10,7 +11,7 @@
         margin-right: 0 !important;
     }
 
-    .btn {
+    .alenite-btn {
         margin-left: auto;
         padding: 0.5rem;
     }

@@ -1,13 +1,12 @@
 import React from 'react';
-import 'styles/icomoon.css';
+import 'styles/icons.scss';
 
-interface IconProps {
+export interface IconProps {
     name: string
 }
-const Icon: React.FC<IconProps> = ( props ) => {
+const Icon = ( props: IconProps ) => {
     const { name } = props;
-    return(<i className={`icon-${name}`}>
-    </i>)
+    return <i data-testid={`icon-${name}`} className={`alenite-icon icon-${name}`}> </i>
 }
 
 export default Icon;

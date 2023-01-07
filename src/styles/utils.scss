@@ -1,5 +1,41 @@
+@use "@sass-collective/strip-unit";
+
 @mixin google-font($family) {
   @import url(https://fonts.googleapis.com/css?family=#{$family});
+}
+
+// ==============================
+// Font size mixin
+// https://codepen.io/jakob-e/pen/yVyYzv
+// ==============================
+
+//  default font scale bounding
+$font-lock-min:  400px !default; 
+$font-lock-max: 1000px !default;
+
+//  font-size 
+@mixin font-size(
+  $min,                         // font-size 
+  $max: null,                   // optional maximum font size
+  $lock-min: $font-lock-min,  // optional minimum viewport width 
+  $lock-max: $font-lock-max   // optional maximum viewport width 
+  ){
+    & { font-size: $min; }
+    @if $max {
+      @media (min-width: $lock-min) { 
+        & { 
+          font-size: calc(
+            #{$min} + 
+            #{strip-unit.strip($max) - strip-unit.strip($min)} * 
+            (100vw - #{$lock-min}) / 
+            #{strip-unit.strip($lock-max) - strip-unit.strip($lock-min)}
+          ); 
+        } 
+      }
+      @media (min-width: $lock-max){ 
+        & { font-size: $max; } 
+      }
+    }
 }
 
 @mixin pseudo($display: block, $pos: absolute, $content: ''){

@@ -1,4 +1,5 @@
-export declare type InputProps = {
+import ComponentProps from '../Component';
+export interface InputProps extends ComponentProps {
     name: string;
     label?: string;
     placeholder?: string;
@@ -8,7 +9,7 @@ export declare type InputProps = {
     value?: string | number;
     onChange?: (arg?: any) => void;
     validator?: (arg?: string | number) => boolean | string;
-};
+}
 export declare type InputRefType = {
     isInputRefType: boolean;
     current: HTMLInputElement | HTMLTextAreaElement | null;

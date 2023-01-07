@@ -1,13 +1,22 @@
-@use 'styles/vars';
+@use '../../styles/vars';
 
-.actionbar-container {
+:root {
+    @include vars.theme;
+}
+
+.alenite-actionbar {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-
+    padding-top: .5rem;
+    padding-bottom: .5rem;
     &.primary {
         background-color: vars.$primary-color;
         color: white;
+    }
+    &.secondary {
+        background-color: vars.$primary-color-light;
+        color: vars.$primary-color-dark;
     }
 
     &.top {
@@ -22,7 +31,7 @@
     .actionbar-right,
     .actionbar-center {
         align-items: center;
-        // TODO: Change accordingly to actionbar-container children number
+        // TODO: Change accordingly to alenite-actionbar children number
         min-width: 33%;
         box-sizing: border-box;
         align-items: center;

@@ -104,7 +104,7 @@ const ActionBarItem: React.FC<ActionBarItemProps> = ( props ) => {
         }
     }, [renderedItem, scaling]);
     
-    return <div ref={ref} className="actionbar-item p025 f jcc">{renderedItem}</div>
+    return <div ref={ref} className='actionbar-item'>{renderedItem}</div>
 }
 
 export default ActionBarItem;
