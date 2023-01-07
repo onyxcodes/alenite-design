@@ -2,10 +2,6 @@
 @use '../../../styles/typography';
 @use '../../../styles/layout';
 
-:root {
-    @include vars.theme;
-}
-
 .alenite-input-text {
     gap: 1rem;
     display: flex;

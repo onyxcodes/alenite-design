@@ -1,10 +1,6 @@
 @use '../../styles/layout';
 @use '../../styles/vars';
 
-:root {
-    @include vars.theme;
-}
-
 .alenite-list {
     display: flex;
     padding: 1rem;

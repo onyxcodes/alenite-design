@@ -4,7 +4,7 @@ import './index.scss';
 import TextInput from 'components/Form/TextInput';
 import { InputRefType } from 'components/Form/types';
 import Button from 'components/Button';
-import ComponentProps from 'components/Component';
+import ComponentProps from '../Component';
 // TODO: Consider the creation and usage of a Form.SearchInput
 // instead of Form.TextInput. The idea is to better integrate 
 // the button inside the input component tree

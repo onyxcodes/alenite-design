@@ -7,10 +7,6 @@
   box-sizing: border-box;
 }
 
-html {
-  @include vars.theme;
-}
-
 body {
   font-family: vars.$font-body !important;
   font-weight: vars.$font-body-weight;

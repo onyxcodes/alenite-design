@@ -1,4 +1,4 @@
-import ComponentProps from 'components/Component';
+import ComponentProps from '../Component';
 
 export interface InputProps extends ComponentProps {
     name: string;

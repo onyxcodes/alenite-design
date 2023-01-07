@@ -1,8 +1,8 @@
 import React from 'react';
 import './index.scss';
 import Button from 'components/Button';
-import ComponentProps from 'components/Component';
-import { accentStyle } from 'utils/colors';
+import ComponentProps from '../Component';
+import { setAccentStyle } from 'utils/colors';
 
 interface AlertBaseProps extends ComponentProps {
     onClose?: () => void;
@@ -49,7 +49,7 @@ const Alert: React.FC<AlertProps> = (props) => {
     if (rounded) alertClass = `${alertClass} rounded`;
 
     let style: {[key: string]: any} = {};
-    style = Object.assign(style, accentStyle({accent, accentLight, accentDark}));
+    style = setAccentStyle(style, {accent, accentLight, accentDark});
 
     if (className) alertClass = `${alertClass} ${className}`;
 

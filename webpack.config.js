@@ -3,16 +3,16 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const components = {
     entry: {
-        button: './src/components/Button/index.scss',
-        alert: './src/components/Alert/index.scss',
-        list: './src/components/List/index.scss',
-        sidebar: './src/components/Sidebar/index.scss',
-        modal: './src/components/Modal/index.scss',
-        searchbar: './src/components/SearchBar/index.scss',
-        select: './src/components/Form/Select/index.scss',
-        textInput: './src/components/Form/TextInput/index.scss',
-        actionBar: './src/components/ActionBar/index.scss',
-        global: './src/styles/global.scss',
+        button: ['./src/components/Button/index.scss', './src/styles/theme.scss'],
+        alert: ['./src/components/Alert/index.scss', './src/styles/theme.scss'],
+        list: ['./src/components/List/index.scss', './src/styles/theme.scss'],
+        sidebar: ['./src/components/Sidebar/index.scss', './src/styles/theme.scss'],
+        modal: ['./src/components/Modal/index.scss', './src/styles/theme.scss'],
+        searchbar: ['./src/components/SearchBar/index.scss', './src/styles/theme.scss'],
+        select: ['./src/components/Form/Select/index.scss', './src/styles/theme.scss'],
+        textInput: ['./src/components/Form/TextInput/index.scss', './src/styles/theme.scss'],
+        actionBar: ['./src/components/ActionBar/index.scss', './src/styles/theme.scss'],
+        global: ['./src/styles/global.scss', './src/styles/theme.scss'],
     },
     output: {
         path: path.resolve(__dirname, 'lib/styles'),

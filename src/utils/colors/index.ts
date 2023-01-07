@@ -4,6 +4,11 @@ export interface AccentConfig {
     accentLight?: string;
     accentDark?: string;
 }
+
+const setAccentStyle = (style: {[key: string]: any}, conf: AccentConfig ) => {
+    return Object.assign(style, accentStyle(conf));
+}
+
 const accentStyle = (conf: AccentConfig) => {
     const { accent, accentLight, accentDark } = conf;
     let style: {[key: string]: any} = {};
@@ -25,4 +30,4 @@ const accentStyle = (conf: AccentConfig) => {
     return style;
 }
 
-export {accentStyle};
+export {accentStyle, setAccentStyle};

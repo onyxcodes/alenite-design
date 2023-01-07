@@ -1,9 +1,9 @@
 import './index.scss';
 
 import ActionBarSection from './ActionBarSection';
-import ComponentProps from 'components/Component';
+import ComponentProps from '../Component';
 
-import { accentStyle } from 'utils/colors';
+import { setAccentStyle } from 'utils/colors';
 export interface ActionBarItemConfig {
     item: JSX.Element;
     position: "left" | "center" | "right";
@@ -30,7 +30,7 @@ const ActionBar: React.FC<ActionBarProps> = ( props ) => {
     let actionBarClass = `alenite-actionbar ${type} ${position}`;
 
     let style: {[key: string]: any} = {};
-    style = Object.assign(style, accentStyle({accent, accentLight, accentDark}));
+    style = setAccentStyle(style, {accent, accentLight, accentDark});
     
     if (className) actionBarClass = `${actionBarClass} ${className}`;
 

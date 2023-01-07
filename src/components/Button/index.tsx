@@ -1,8 +1,8 @@
 import React from 'react';
 import Icon from 'components/Icon';
-import ComponentProps from 'components/Component';
+import ComponentProps from '../Component';
 import './index.scss';
-import { accentStyle } from 'utils/colors';
+import { setAccentStyle } from 'utils/colors';
 
 interface BaseButtonProps extends ComponentProps {
     name?: string;
@@ -46,7 +46,7 @@ const Button: React.FC<ButtonProps> = ( props ) => {
     else btnClass = `${btnClass} anim-pulse`;
 
     let style: {[key: string]: any} = {};
-    style = Object.assign(style, accentStyle({accent, accentLight, accentDark}));
+    style = setAccentStyle(style, {accent, accentLight, accentDark});
     
     return <div
         role='button'
