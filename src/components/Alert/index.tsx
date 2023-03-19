@@ -10,7 +10,8 @@ interface AlertBaseProps extends ComponentProps {
     visible?: boolean;
     closeAlert?: () => void;
     showClose?: boolean;
-    rounded?: boolean;
+    cornerRadius?: false | 's' | 'm' | 'l';
+    transition?: boolean;
 }
 
 interface AlertCustomProps extends AlertBaseProps {
@@ -33,7 +34,8 @@ const Alert: React.FC<AlertProps> = (props) => {
         visible = true,
         closeAlert,
         showClose = true,
-        rounded = true,
+        cornerRadius = false,
+        transition,
         onClose,
         children,
         message,
@@ -46,7 +48,7 @@ const Alert: React.FC<AlertProps> = (props) => {
     const [visibility, setVisibility] = React.useState(false);
 
     let alertClass = 'alenite-alert';
-    if (rounded) alertClass = `${alertClass} rounded`;
+    if (cornerRadius) alertClass = `${alertClass} corner-radius-${cornerRadius}`;
 
     let style: {[key: string]: any} = {};
     style = setAccentStyle(style, {accent, accentLight, accentDark});

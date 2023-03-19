@@ -7,7 +7,8 @@ interface AlertBaseProps extends ComponentProps {
     visible?: boolean;
     closeAlert?: () => void;
     showClose?: boolean;
-    rounded?: boolean;
+    cornerRadius?: false | 's' | 'm' | 'l';
+    transition?: boolean;
 }
 interface AlertCustomProps extends AlertBaseProps {
     children?: React.ReactNode;
