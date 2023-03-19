@@ -1,5 +1,5 @@
-/// <reference types="react" />
 import './index.scss';
+import React from 'react';
 import ComponentProps from '../Component';
 export interface ActionBarItemConfig {
     item: JSX.Element;
@@ -14,5 +14,5 @@ export interface ActionBarProps extends ComponentProps {
     items: (ActionBarItemConfig | null)[];
     type?: 'default' | 'primary' | 'secondary';
 }
-declare const ActionBar: React.FC<ActionBarProps>;
+declare const ActionBar: React.ForwardRefExoticComponent<ActionBarProps & React.RefAttributes<HTMLDivElement>>;
 export default ActionBar;

@@ -34,7 +34,7 @@ const components = {
         ],
     },
     plugins: [
-        new MiniCssExtractPlugin(),
+        new MiniCssExtractPlugin()
     ],
     resolve: {
         extensions: [
@@ -51,9 +51,11 @@ const config = {
     output: {
         path: path.resolve(__dirname, 'lib'),
         filename: 'index.js',
+        globalObject: 'this',
         library: {
             type: 'module',
         },
+    libraryTarget: 'commonjs'
     },
     externals: {
         react: 'react',

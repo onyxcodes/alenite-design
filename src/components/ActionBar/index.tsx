@@ -1,5 +1,6 @@
 import './index.scss';
 
+import React from 'react';
 import ActionBarSection from './ActionBarSection';
 import ComponentProps from '../Component';
 
@@ -19,7 +20,7 @@ export interface ActionBarProps extends ComponentProps {
     type?: 'default' | 'primary' | 'secondary';
 };
 
-const ActionBar: React.FC<ActionBarProps> = ( props ) => {
+const ActionBar = React.forwardRef<HTMLDivElement, ActionBarProps>(( props, ref ) => {
     const { 
         position ='top',
         items,
@@ -29,13 +30,15 @@ const ActionBar: React.FC<ActionBarProps> = ( props ) => {
     } = props;
     let actionBarClass = `alenite-actionbar ${type} ${position}`;
 
+    // const actionBarRef = React.useRef<HTMLDivElement>(null);
+    // console.log("Got actionbar ref", actionBarRef);
     let style: {[key: string]: any} = {};
     style = setAccentStyle(style, {accent, accentLight, accentDark});
     
     if (className) actionBarClass = `${actionBarClass} ${className}`;
 
     return (
-        <div 
+        <div ref={ref}
             className={actionBarClass}
             style={style}
         >
@@ -44,6 +47,6 @@ const ActionBar: React.FC<ActionBarProps> = ( props ) => {
             <ActionBarSection type='right' items={items} />
         </div>
     )
-}
+});
 
 export default ActionBar;
