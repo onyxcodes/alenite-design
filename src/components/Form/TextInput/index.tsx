@@ -25,6 +25,7 @@ const TextInput = React.forwardRef( ( props: TextInputProps, ref: React.Forwarde
         labelSeparator = ':',
         value,
         className,
+        disabled = false,
         accent, accentDark, accentLight,
     } = props;
     
@@ -73,10 +74,12 @@ const TextInput = React.forwardRef( ( props: TextInputProps, ref: React.Forwarde
     }, [inputRef.current, validator, required]);
 
     const onValueChange = React.useCallback( () => {
-        const value = inputRef?.current?.value;
-        onChange && onChange(value);
-        checkValidity();
-    }, [onChange, required]);
+        if (disabled) {
+            const value = inputRef?.current?.value;
+            onChange && onChange(value);
+            checkValidity();
+        }
+    }, [onChange, disabled, required]);
 
     const onKeyUp = React.useCallback( (e: React.KeyboardEvent<HTMLInputElement>) => {
         if ( e.key == 'Enter' && onPressEnter) {
@@ -105,8 +108,9 @@ const TextInput = React.forwardRef( ( props: TextInputProps, ref: React.Forwarde
             <input ref={inputRef}
                 name={name}
                 type={type}
-                onChange={onValueChange}
-                onKeyUp={onKeyUp}
+                disabled={disabled}
+                onChange={!disabled ? onValueChange : undefined}
+                onKeyUp={!disabled ? onKeyUp : undefined}
                 placeholder={placeholder}
                 defaultValue={value}
                 required={required}

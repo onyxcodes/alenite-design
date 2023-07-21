@@ -1,4 +1,4 @@
-import React, { MutableRefObject } from 'react';
+import React, { MutableRefObject, RefObject } from 'react';
 import './index.scss';
 
 import ActionBarAltItem from 'components/ActionBar/ActionBarAltItem';
@@ -13,7 +13,7 @@ export interface ActionBarItemProps {
     scaleFactor?: number;
     alt?: JSX.Element;
     uniqueKey: string | number;
-    sectionRef?: MutableRefObject<HTMLDivElement | null>;
+    sectionRef: RefObject<HTMLDivElement | null | undefined>;
     setReady?: ( arg: any ) => void;
 }
 export type ActionBarItemRef = {
@@ -57,7 +57,7 @@ const ActionBarItem: React.FC<ActionBarItemProps> = ( props ) => {
 
    
 
-    const sectionWidth = useElementWidth(sectionRef?.current);
+    const sectionWidth = useElementWidth(sectionRef);
 
     // If scaling is enabled and configured correctly, checks if it should switch to scaled form
     React.useLayoutEffect( () => {
