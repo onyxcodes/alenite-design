@@ -1,4 +1,4 @@
-import React, { MutableRefObject } from 'react';
+import React, { RefObject } from 'react';
 import './index.scss';
 export interface ActionBarItemProps {
     item: JSX.Element;
@@ -8,7 +8,7 @@ export interface ActionBarItemProps {
     scaleFactor?: number;
     alt?: JSX.Element;
     uniqueKey: string | number;
-    sectionRef?: MutableRefObject<HTMLDivElement | null>;
+    sectionRef: RefObject<HTMLDivElement | null | undefined>;
     setReady?: (arg: any) => void;
 }
 export declare type ActionBarItemRef = {

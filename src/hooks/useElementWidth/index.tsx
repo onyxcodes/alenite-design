@@ -4,7 +4,7 @@ import React, { RefObject } from 'react';
  * 
  * https://dev.to/vitaliemaldur/resize-event-listener-using-react-hooks-1k0c
  */
-const useElementWidth = (ref: RefObject<HTMLElement>) => {
+const useElementWidth = (ref: RefObject<HTMLElement | undefined | null>) => {
 // const useElementWidth = (element: HTMLElement | null) => {
 	// save current element width in the state object
 	const [width, setWidth] = React.useState(ref.current?.clientWidth || 0);
