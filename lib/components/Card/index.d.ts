@@ -3,7 +3,7 @@ import './index.scss';
 import ComponentProps from '../Component';
 export interface CardProps extends ComponentProps {
     heading?: string;
-    content?: React.ReactNode;
+    children?: React.ReactNode;
     size?: [number, number];
     size_s?: [number, number];
     size_m?: [number, number];

@@ -18,6 +18,6 @@ interface IconButtonProps extends BaseButtonProps {
     shape?: 'default' | 'circle';
     children?: never;
 }
-export declare type ButtonProps = TextButtonProps | IconButtonProps;
+export type ButtonProps = TextButtonProps | IconButtonProps;
 declare const Button: React.FC<ButtonProps>;
 export default Button;

@@ -11,7 +11,7 @@ export interface InputProps extends ComponentProps {
     onChange?: (arg?: any) => void;
     validator?: (arg?: string | number) => boolean | string;
 }
-export declare type InputRefType = {
+export type InputRefType = {
     isInputRefType: boolean;
     current: HTMLInputElement | HTMLTextAreaElement | null;
     checkValidity: () => (string | boolean)[];

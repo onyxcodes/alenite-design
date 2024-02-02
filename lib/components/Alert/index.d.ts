@@ -20,6 +20,6 @@ interface AlertSimpleProps extends AlertBaseProps {
     message: string;
     action?: JSX.Element[];
 }
-export declare type AlertProps = AlertSimpleProps | AlertCustomProps;
+export type AlertProps = AlertSimpleProps | AlertCustomProps;
 declare const Alert: React.FC<AlertProps>;
 export default Alert;

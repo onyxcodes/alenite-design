@@ -5,7 +5,7 @@ interface AcctionBarSectionProps {
     type: 'left' | 'center' | 'right';
     items: (ActionBarItemConfig | null)[];
 }
-export declare type ActionBarSectionRef = {
+export type ActionBarSectionRef = {
     width: number;
     element: HTMLElement | null;
 };
