@@ -14,13 +14,15 @@ interface BaseButtonProps extends ComponentProps {
 }
 
 interface TextButtonProps extends BaseButtonProps {
-    shape?: never;
+    shape?: 'circle';
+    type?: 'text';
     children: string;
 }
 
 interface IconButtonProps extends BaseButtonProps {
     iconName: string;
-    shape?: 'default' | 'circle';
+    type?: 'default' | 'primary';
+    shape?: 'default-shape' | 'circle';
     children?: never;
 }
 
