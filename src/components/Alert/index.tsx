@@ -99,7 +99,7 @@ const Alert: React.FC<AlertProps> = (props) => {
         { (action || showClose) ? <div className='action'>
             {action}
             {showClose && <Button onClick={closeAlert} className='alert-close'
-                iconName='close' shape='circle' type='text'
+                iconName='close' shape='circle'
             />}
         </div> : null }
     </>
