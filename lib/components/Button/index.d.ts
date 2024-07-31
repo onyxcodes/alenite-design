@@ -10,12 +10,14 @@ interface BaseButtonProps extends ComponentProps {
     type?: 'default' | 'primary' | 'text';
 }
 interface TextButtonProps extends BaseButtonProps {
-    shape?: never;
-    children: string;
+    shape?: 'circle';
+    type?: 'text';
+    children?: string;
 }
 interface IconButtonProps extends BaseButtonProps {
     iconName: string;
-    shape?: 'default' | 'circle';
+    type?: 'default' | 'primary';
+    shape?: 'default-shape' | 'circle';
     children?: never;
 }
 export type ButtonProps = TextButtonProps | IconButtonProps;

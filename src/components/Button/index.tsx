@@ -16,7 +16,7 @@ interface BaseButtonProps extends ComponentProps {
 interface TextButtonProps extends BaseButtonProps {
     shape?: 'circle';
     type?: 'text';
-    children: string;
+    children?: string;
 }
 
 interface IconButtonProps extends BaseButtonProps {

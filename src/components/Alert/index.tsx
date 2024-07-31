@@ -90,7 +90,7 @@ const Alert: React.FC<AlertProps> = (props) => {
         <>
             {children}
             {showClose && <div className='action'><Button onClick={closeAlert} className='alert-close'
-                iconName='close' shape='circle' type='text'
+                iconName='close' shape='circle'
             /></div>}
         </> : <>
         <div className='message'>
