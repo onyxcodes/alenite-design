@@ -48,7 +48,7 @@ const Modal: React.FC<ModalProps> = (props) => {
                     ...(topActionBarItems instanceof Function && topActionBarItems() || topActionBarItems instanceof Array && topActionBarItems || []),
                     showClose ? {
                         item: <Button
-                            shape='circle' type='text'
+                            shape='circle'
                             onClick={closeModal} iconName='close'
                             accent={accent} accentDark={accentDark} accentLight={accentLight}
                         />,

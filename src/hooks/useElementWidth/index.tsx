@@ -1,25 +1,28 @@
-import React from 'react';
+import React, { RefObject } from 'react';
 
 /**
- *
+ * 
  * https://dev.to/vitaliemaldur/resize-event-listener-using-react-hooks-1k0c
  */
-const useElementWidth = (element?: HTMLElement | null, property: 'clientWidth' | 'offsetWidth' = 'clientWidth') => {
+const useElementWidth = (ref: RefObject<HTMLElement | undefined | null>) => {
+// const useElementWidth = (element: HTMLElement | null) => {
 	// save current element width in the state object
-	const [width, setWidth] = React.useState(element?.[property] || 0);
+	const [width, setWidth] = React.useState(ref.current?.clientWidth || 0);
 
 	React.useEffect(() => {
-		if (element) {
+		// let element = ref.current;
+		if (ref.current) {
 			// timeoutId for debounce mechanism
 			let timeoutId: number;
-			setWidth(element[property]);
+			setWidth(ref.current.clientWidth);
+
 			const resizeListener = () => {
 				// prevent execution of previous setTimeout
 				window.clearTimeout(timeoutId);
 				// trigger execution after 150 milliseconds
 				timeoutId = window.setTimeout(() => {
 					// change width only if it differs from current one
-					if (element[property] !== width) setWidth(element[property])
+					if (ref.current?.clientWidth !== width) setWidth(ref.current?.clientWidth || 0)
 				}, 150);
 			};
 			// set resize listener
@@ -31,12 +34,12 @@ const useElementWidth = (element?: HTMLElement | null, property: 'clientWidth' |
 				window.removeEventListener('resize', resizeListener);
 			}
 		}
-	}, [element]);
+	}, [ref])
 
 	// Tracks elemenet width also when changing in content size
 	React.useEffect(() => {
-		setWidth(element?.[property] || 0)
-	}, [element?.[property]])
+		setWidth(ref.current?.clientWidth || 0)
+	}, [ref.current?.clientWidth])
 
 	return width;
 }

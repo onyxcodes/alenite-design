@@ -96,7 +96,7 @@ const ActionBarSection: React.FC<AcctionBarSectionProps> = ( props: AcctionBarSe
     // TODO: Explain how refs alone can't be used in array deps
     const [ gotRef, markRefPresence ] = React.useState(false); 
 
-    const sectionWidth = useElementWidth(ref.current);
+    const sectionWidth = useElementWidth(ref);
 
     const actionBarSectionClass = `actionbar-${type}`;
 

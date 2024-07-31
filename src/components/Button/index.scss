@@ -36,7 +36,7 @@
     &.btn-primary {
         border: solid thin vars.$primary-color;
         background-color: vars.$primary-color;
-        color: white;
+        color: vars.$primary-color-dark;
         &:hover:not(.btn-disabled), &:focus:not(.btn-disabled) {
             border: solid thin vars.$primary-color-dark;
             background-color: vars.$primary-color-dark;

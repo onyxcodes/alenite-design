@@ -70,11 +70,13 @@
         }
     }
 
-    &.rounded {
+    &.corner-radius-s {
         border-radius: .75rem;
         .alert-wrapper .alert-cover {
             border-radius: .75rem;
         }
     }
+
+    // TODO: Corner radius l, m
     
 }

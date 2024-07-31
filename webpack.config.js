@@ -1,6 +1,44 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
+// TODO: export only useful!!
+const styleUtils = {
+    entry: {
+        animations: "./src/styles/animations.scss",
+        global: "./src/styles/global.scss",
+        icons: "./src/styles/icons.scss",
+        layers: "./src/styles/layers.scss",
+        layout: "./src/styles/layout.scss",
+        lists: "./src/styles/lists.scss",
+        typography: "./src/styles/typography.scss",
+        utils: "/src/styles/utils.scss",
+        vars: "./src/styles/vars.scss"
+    },
+    output: {
+        path: path.resolve(__dirname, 'lib/styles'),
+    },
+    module: {
+        rules: [
+            {
+                test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
+                type: "asset",
+            },
+            {
+                test: /\.s[ac]ss$/i,
+                loader: 'file-loader',
+                options: {
+                    name: '[name].[ext]',
+                },
+            },
+        ],
+    },
+    resolve: {
+        extensions: [
+            '.scss', '.eot', '.svg', '.ttf', '.woff'
+        ],
+    }
+}
+
 const components = {
     entry: {
         button: ['./src/components/Button/index.scss', './src/styles/theme.scss'],
@@ -34,7 +72,7 @@ const components = {
         ],
     },
     plugins: [
-        new MiniCssExtractPlugin(),
+        new MiniCssExtractPlugin()
     ],
     resolve: {
         extensions: [
@@ -51,9 +89,11 @@ const config = {
     output: {
         path: path.resolve(__dirname, 'lib'),
         filename: 'index.js',
+        globalObject: 'this',
         library: {
             type: 'module',
         },
+    libraryTarget: 'commonjs'
     },
     externals: {
         react: 'react',
@@ -104,5 +144,5 @@ const config = {
 };
 
 module.exports = () => {
-    return [components, config];
+    return [components, config, styleUtils];
 }

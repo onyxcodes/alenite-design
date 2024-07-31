@@ -5,6 +5,7 @@ export interface InputProps extends ComponentProps {
     label?: string;
     placeholder?: string;
     inline?: boolean;
+    disabled?: boolean;
     labelSeparator?: string;
     required?: boolean;
     value?: string | number;

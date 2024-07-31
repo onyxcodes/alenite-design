@@ -16,13 +16,15 @@ interface ListProps {
     onProcessEnd?: (arg: any) => void;
     // size?: 'm' | 'l';
     type?: 'list' | 'grid';
+    padding?: 's' | 'm' | 'l';
 }
 const List: React.FC<ListProps> = ( props ) => {
     const { 
-        data, pageSize,
+        data, pageSize = 24,
         infiniteScroll,
         type = 'list',
         headerItems, footerItems,
+        padding = 's',
         listProcessor, onProcessEnd,
     } = props;
 
@@ -48,16 +50,16 @@ const List: React.FC<ListProps> = ( props ) => {
         return pages
     }
 
-    let listClass = 'alenite-list',
+    let listClass = `alenite-list ${type}`,
     // listWrapprerClass = `col-9 col-lg-12`;
     listWrapprerClass = `list-wrapper`;
-    
+
     return <div className={listClass}>
         { headerItems && <ActionBar position="top"
             items={headerItems || []}
         /> }
         <div className={listWrapprerClass}>
-            <div className='page-container'>
+            <div className={`page-container padding-${padding}`}>
             {/* <div className='columns jcc'> */}
                 { infiniteScroll ? 
                     useInfinitePages(
