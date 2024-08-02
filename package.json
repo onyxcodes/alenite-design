@@ -12,6 +12,9 @@
   "contributors": [
     "Onyx <onyxganda@gmail.com> (https://onyx.ac)"
   ],
+  "workspaces": [
+    "packages/*"
+  ],
   "license": "CC-BY-SA-4.0",
   "peerDependencies": {
     "react": ">=16.8.0",

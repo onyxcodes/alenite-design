@@ -2,8 +2,8 @@ const path = require("path");
 
 module.exports = {
   "stories": [
-    "../src/components/**/stories.mdx",
-    "../src/components/**/stories.@(js|jsx|ts|tsx)"
+    "../../../src/components/**/stories.mdx",
+    "../../../src/components/**/stories.@(js|jsx|ts|tsx)"
   ],
   "addons": [
     "@storybook/addon-links",
@@ -26,11 +26,11 @@ module.exports = {
         }
       ]
     });
-
+    console.log("TEST",path.resolve(__dirname, "../../../src/components"),)
     config.resolve.alias = { ...config.resolve.alias,
-      'styles': path.resolve(__dirname, "../src/styles"),
-      'components': path.resolve(__dirname, "../src/components"),
-      'utils': path.resolve(__dirname, "../src/utils"),
+      'styles': path.resolve(__dirname, "../../../src/styles"),
+      'components': path.resolve(__dirname, "../../../src/components"),
+      'utils': path.resolve(__dirname, "../../../src/utils"),
     }
 
     // Return the altered config
