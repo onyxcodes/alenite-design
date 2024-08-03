@@ -23,7 +23,7 @@ export interface ActionBarProps extends ComponentProps {
 const ActionBar = React.forwardRef<HTMLDivElement, ActionBarProps>(( props, ref ) => {
     const { 
         position ='top',
-        items,
+        items = [],
         type = 'default',
         accent, accentLight, accentDark,
         className
