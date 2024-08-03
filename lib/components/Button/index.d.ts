@@ -1,7 +1,7 @@
 import React from 'react';
 import ComponentProps from '../Component';
 import './index.scss';
-interface ButtonProps extends ComponentProps {
+export interface ButtonProps extends ComponentProps {
     name?: string;
     iconName?: string;
     title?: string;
