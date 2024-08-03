@@ -74,19 +74,21 @@ const TextInput = React.forwardRef( ( props: TextInputProps, ref: React.Forwarde
     }, [inputRef.current, validator, required]);
 
     const onValueChange = React.useCallback( () => {
-        if (disabled) {
+        if (!disabled) {
             const value = inputRef?.current?.value;
             onChange && onChange(value);
             checkValidity();
         }
-    }, [onChange, disabled, required]);
+    }, [onChange, disabled, checkValidity]);
 
     const onKeyUp = React.useCallback( (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if ( e.key == 'Enter' && onPressEnter) {
+        if (disabled) {
+            // avoid
+        } else if ( e.key == 'Enter' && onPressEnter) {
             const value = inputRef?.current?.value;
             onPressEnter(value);
         }
-    }, [onPressEnter])
+    }, [onPressEnter, disabled])
 
     /* Transforms 'isInvalid' array of errors into a list
      */
@@ -97,7 +99,7 @@ const TextInput = React.forwardRef( ( props: TextInputProps, ref: React.Forwarde
     let style: {[key: string]: any} = {};
     style = setAccentStyle(style, {accent, accentLight, accentDark});
 
-    return <div
+    return React.useMemo( () => <div
         className={inputClass}
         style={style}
     >
@@ -109,8 +111,8 @@ const TextInput = React.forwardRef( ( props: TextInputProps, ref: React.Forwarde
                 name={name}
                 type={type}
                 disabled={disabled}
-                onChange={!disabled ? onValueChange : undefined}
-                onKeyUp={!disabled ? onKeyUp : undefined}
+                onChange={onValueChange}
+                onKeyUp={onKeyUp}
                 placeholder={placeholder}
                 defaultValue={value}
                 required={required}
@@ -121,7 +123,7 @@ const TextInput = React.forwardRef( ( props: TextInputProps, ref: React.Forwarde
                 { renderedErrors }
             </ul> : <></>}
         </div>
-    </div>
+    </div>, [name, type, disabled, onValueChange, onKeyUp, placeholder, value, required, isInvalid, renderedErrors ]);
 });
 
 export default TextInput;

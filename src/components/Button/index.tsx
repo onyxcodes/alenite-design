@@ -4,7 +4,7 @@ import ComponentProps from '../Component';
 import './index.scss';
 import { setAccentStyle } from 'utils/colors';
 
-interface ButtonProps extends ComponentProps {
+export interface ButtonProps extends ComponentProps {
     name?: string;
     iconName?: string;
     title?: string;
