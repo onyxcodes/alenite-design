@@ -33,10 +33,10 @@ export const Prompt = Template.bind({});
 Prompt.args = {
 	cover: <Icon name='question'/>,
 	message: 'This is an prompt alert. Lorem ipsum dolor etcetera andiamo avnati consi finche mo non finisco lo spazio per farelo stare su una sola riga',
-	action:	<>
-		<Button>Yes</Button>
+	action:	[
+		<Button>Yes</Button>,
 		<Button>No</Button>
-	</>
+	]
 };
 
 export const ImageCover = Template.bind({});
