@@ -9,11 +9,11 @@ import ComponentProps from '../Component';
 // instead of Form.TextInput. The idea is to better integrate 
 // the button inside the input component tree
 
-interface SearchBarProps extends ComponentProps {
+export interface SearchBarProps extends ComponentProps {
     disabled?: boolean;
     placeholder?: string;
     value?: string;
-    onSearch: (query: string) => void;
+    onSearch?: (query: string) => void;
 }
 const SearchBar: React.FC<SearchBarProps> = ( props ) => {
     const {
@@ -30,13 +30,13 @@ const SearchBar: React.FC<SearchBarProps> = ( props ) => {
 
     const inputRef = React.useRef<InputRefType | null>(null)
     const [ query, setQuery ] = React.useState<string | undefined>(value);
-    const [ btnDisabled, disableBtn ] = React.useState(true);
+    const [ btnDisabled, setDisableState ] = React.useState(true);
 
     const timeoutId = React.useRef<number | undefined>(undefined);
 
     const prepareSearch = React.useCallback( (value?: string) => {
         // enable button
-        disableBtn(false)
+        setDisableState(false)
         if (timeoutId.current) window.clearTimeout(timeoutId.current);
         if ( value !== query ) {
             timeoutId.current = window.setTimeout( () => {
@@ -56,13 +56,15 @@ const SearchBar: React.FC<SearchBarProps> = ( props ) => {
     }, [inputRef]);
 
     React.useEffect( () => {
-        if (query || query === '') {
+        if (!query || query === '') {
+            setDisableState(true);
+        } else if (onSearch) {
+            setDisableState(false);
             onSearch(query);
-            disableBtn(true);
         }
     }, [query, onSearch])
     
-    return <div className={searchbarClass}>
+    return React.useMemo( () => <div className={searchbarClass}>
         <TextInput type='text'
             ref={inputRef}
             // disabled={disabled} // TODO
@@ -84,7 +86,7 @@ const SearchBar: React.FC<SearchBarProps> = ( props ) => {
             accentDark={accentDark}
             accentLight={accentLight}
         />
-    </div>
+    </div>, [searchbarClass, query, btnDisabled, accent, accentDark, accentLight, placeholder])
 }
 
 export default SearchBar;
