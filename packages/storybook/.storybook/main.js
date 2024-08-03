@@ -26,11 +26,12 @@ module.exports = {
         }
       ]
     });
-    console.log("TEST",path.resolve(__dirname, "../../../src/components"),)
+
     config.resolve.alias = { ...config.resolve.alias,
       'styles': path.resolve(__dirname, "../../../src/styles"),
       'components': path.resolve(__dirname, "../../../src/components"),
       'utils': path.resolve(__dirname, "../../../src/utils"),
+      'hooks': path.resolve(__dirname, "../../../src/hooks"),
     }
 
     // Return the altered config
