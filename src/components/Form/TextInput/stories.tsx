@@ -6,6 +6,7 @@ export default {
     title: 'Commons/Form/TextInput',
     component: TextInput,
     argTypes: {
+        type: { control: { type: 'select', options: ['text', 'email', 'password'] } },
         accent: { control: 'color' },
         accentDark: { control: 'color' },
         accentLight: { control: 'color' },
@@ -29,9 +30,18 @@ Email.args = {
     label: 'Your email address',
 };
 
+export const Password = Template.bind({});
+Email.args = {
+    name: 'password',
+    type: 'password',
+    label: 'Password',
+    placeholder: '*******'
+};
+
+
 export const Inline = Template.bind({});
 Inline.args = {
-    name: 'story',
+    name: 'inline-input',
     label: 'Your favorite color',
     type: 'text',
     inline: true,
