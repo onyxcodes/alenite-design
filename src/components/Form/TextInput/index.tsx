@@ -4,7 +4,7 @@ import { setAccentStyle } from 'utils/colors';
 import { InputProps, InputRefType } from '../types';
 export interface TextInputProps extends InputProps {
     // TODO: Extend with other compatible types
-    type: 'text' | 'email';
+    type: 'text' | 'email' | 'password';
     onPressEnter?: (arg?: string | null) => void;
     onChange?: (arg?: string) => void;
     // TODO: Consider moving to InputProps
@@ -104,8 +104,9 @@ const TextInput = React.forwardRef( ( props: TextInputProps, ref: React.Forwarde
         style={style}
     >
         <div className={inputWrapperClass}>
-            { label && 
+            { label ? 
                 <label className='input-text-label' htmlFor={name}>{`${label}${labelSeparator}`}</label>
+                : <></>
             }
             <input ref={inputRef}
                 name={name}
