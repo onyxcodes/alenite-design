@@ -11,7 +11,7 @@ export interface ActionBarItemProps {
     sectionRef: RefObject<HTMLDivElement | null | undefined>;
     setReady?: (arg: any) => void;
 }
-export declare type ActionBarItemRef = {
+export type ActionBarItemRef = {
     element: HTMLDivElement | null;
     key: string | number;
 };

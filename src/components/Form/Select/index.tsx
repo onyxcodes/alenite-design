@@ -12,6 +12,7 @@ export interface SelectProps extends ComponentProps {
     options: SelectOption[];
     name: string;
     label?: string;
+    placeholder?: string | JSX.Element;
     onChange?: ( arg: SelectOption ) => void;
 }
 const Select: React.FC<SelectProps> = ( props ) => {
@@ -19,13 +20,13 @@ const Select: React.FC<SelectProps> = ( props ) => {
         options,
         name,
         label,
+        placeholder,
         onChange,
         className,
         accent, accentLight, accentDark
     } = props;
     const [ selected, setSelected ] = React.useState<SelectOption | undefined>(
-        // TODO: Add warning or error when found more than an option with same value
-        options.filter( el => el.selected )[0]
+        undefined
     );
     const selectRef = React.useRef<HTMLSelectElement | null>(null);
 
@@ -36,6 +37,7 @@ const Select: React.FC<SelectProps> = ( props ) => {
         value: string;
         selected?: boolean;
     }) => {
+        console.log("alenite-design: doSelection", {el, selected: selectRef.current?.value});
         // Update hidden input (mirror)
         if (
             selectRef.current &&
@@ -44,6 +46,7 @@ const Select: React.FC<SelectProps> = ( props ) => {
             selectRef.current.value = el.value;
             // Update surface component
             el.selected = true;
+            console.log("doSelection: setting selection to", el);
             setSelected(el);
         };
         // Remove focus from surface component
@@ -58,9 +61,16 @@ const Select: React.FC<SelectProps> = ( props ) => {
 
     React.useEffect( () => {
         if ( selected && onChange ) {
+            console.log("triggering onChange for selection:", selected);
             onChange(selected)
         };
     }, [selected, dropdownRef]);
+
+    const selector = React.useMemo(() => {
+        if (placeholder != null && typeof placeholder !== "string" ) {
+            return <div className="alenite-select-selector">{placeholder}</div>;
+        } else return <span>{ selected?.label || placeholder || 'Select...'}</span>
+    }, [placeholder, selected?.label])
 
     return <div 
         className={selectClass}
@@ -68,7 +78,7 @@ const Select: React.FC<SelectProps> = ( props ) => {
     >
         { label && <label className='dropdown-label' htmlFor={name}>{label}</label>}
         <div tabIndex={0} className='dropdown-select anim-pulse' ref={dropdownRef}>
-            <span>{ selected?.label || 'Select...'}</span>
+            {selector}
             <div className='button'></div>
             <ul>
                 {options.map( (el, i) => <li 
@@ -83,8 +93,9 @@ const Select: React.FC<SelectProps> = ( props ) => {
         <select
             ref={selectRef}
             name={name}
-            defaultValue={selected?.value}
-        >
+            defaultValue={selected?.value || "__placeholder"}
+        >   
+            <option key={"__placeholder"} value={"__placeholder"}></option>
             {options.map( (el, i) => <option 
                 key={i}
                 value={el.value}

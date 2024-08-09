@@ -30,8 +30,9 @@ const accentStyle = (conf: AccentConfig) => {
     return style;
 }
 
-/** From https://stackoverflow.com/a/50282399 
- * Takes a 3 or 6-digit hex color code, and an optional 0-255 numeric alpha value
+/** 
+ * Takes a 3 or 6-digit hex color code, 
+ * and an optional loating-point number representing the alpha value (0-1)
 */
 export const hex2rgba = (hex: string, alpha: number) => {
     if (hex[0] !== '#') return undefined;
@@ -41,7 +42,7 @@ export const hex2rgba = (hex: string, alpha: number) => {
           : [hex.slice(1, 3), hex.slice(3, 5), hex.slice(5, 7)];
     const intValues = stringValues.map(n => parseInt(n, 16));
    
-    return (typeof alpha === 'number')
+    return (typeof alpha === 'number' && alpha >= 0 && alpha <= 1)
       ? `rgba(${intValues.join(', ')}, ${alpha})`
       : `rgb(${intValues.join(', ')})`;
 }

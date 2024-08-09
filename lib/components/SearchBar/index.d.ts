@@ -1,11 +1,11 @@
 import React from 'react';
 import './index.scss';
 import ComponentProps from '../Component';
-interface SearchBarProps extends ComponentProps {
+export interface SearchBarProps extends ComponentProps {
     disabled?: boolean;
     placeholder?: string;
     value?: string;
-    onSearch: (query: string) => void;
+    onSearch?: (query: string) => void;
 }
 declare const SearchBar: React.FC<SearchBarProps>;
 export default SearchBar;

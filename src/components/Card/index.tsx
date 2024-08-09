@@ -28,7 +28,7 @@ const cardSizing = ( conf: CardSizeConfig ) => {
 
 export interface CardProps extends ComponentProps {
     heading?: string;
-    content?: React.ReactNode;
+    children?: React.ReactNode;
     // TODO: set accepted sizes, and style accordingly
     size?: [number, number];
     size_s?: [number, number];
@@ -54,7 +54,7 @@ const Card: React.FC<CardProps> = ( props ) => {
         onClick, onClose,
         accent, accentDark, accentLight,
         bgColor = "#999999", cover,
-        className, content, headingBgAlfa = 1,
+        className, children, headingBgAlfa = 1,
         cornerRadius = 's', padding = 's',
         headingBgColor = accent || "#ffffff",
         headingTextAlign = 'start',
@@ -111,21 +111,26 @@ const Card: React.FC<CardProps> = ( props ) => {
         }
     }, [mounted]);
 
+    const header = React.useMemo(()=> {
+        if (cover != null || heading?.length) {
+            return <div className="cover" style={{
+                backgroundRepeat: cover ? 'no-repeat' : undefined,
+                backgroundSize: cover ? 'contain' : undefined,
+                backgroundPosition: cover ? 'center' : undefined,
+                backgroundImage: cover ? "url("+cover+")" : undefined 
+            }}>
+                <div className='heading' style={headingStyle}>{heading}</div>
+            </div>
+        }
+    }, []);
+
     return mounted ? <div 
         className={cardClass}
         onClick={onClick}
         style={style}
     >
-        <div className="cover" style={{
-            backgroundRepeat: cover ? 'no-repeat' : undefined,
-            backgroundSize: cover ? 'contain' : undefined,
-            backgroundPosition: cover ? 'center' : undefined,
-            backgroundImage: cover ? "url("+cover+")" : undefined 
-        }}>
-            <div className='heading' style={headingStyle}>{heading}</div>
-        </div>
-        
-        <div className="content">{content}</div>
+        {header}
+        <div className="content">{children}</div>
     </div> : <></>
 }
 

@@ -1,6 +1,7 @@
 import { render, cleanup, screen, within, fireEvent } from '@testing-library/react';
 
 import Button from '../';
+import React from 'react';
 
 afterEach(() => cleanup());
 
@@ -19,11 +20,9 @@ test('Button with specific type, shape and disabled state', () => {
     render(<Button
         name='primary-circle'
         shape='circle'
+        iconName='A'
         type='primary'
-        disabled
-    >
-        A
-    </Button>);
+        disabled/>);
 
     const btnEl = screen.getByTestId('button-primary-circle');
 
