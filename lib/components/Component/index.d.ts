@@ -1,5 +1,5 @@
 import { AccentConfig } from 'utils/colors';
-type ComponentProps = {
+interface ComponentProps extends AccentConfig {
     className?: string;
-} & AccentConfig;
+}
 export default ComponentProps;
