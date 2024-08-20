@@ -45,6 +45,7 @@ const components = {
         alert: ['./src/components/Alert/index.scss', './src/styles/theme.scss'],
         list: ['./src/components/List/index.scss', './src/styles/theme.scss'],
         sidebar: ['./src/components/Sidebar/index.scss', './src/styles/theme.scss'],
+        slider: ['./src/components/Slider/index.scss', './src/styles/theme.scss'],
         modal: ['./src/components/Modal/index.scss', './src/styles/theme.scss'],
         searchbar: ['./src/components/SearchBar/index.scss', './src/styles/theme.scss'],
         select: ['./src/components/Form/Select/index.scss', './src/styles/theme.scss'],
