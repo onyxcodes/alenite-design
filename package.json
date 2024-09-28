@@ -1,10 +1,16 @@
 {
   "name": "alenite-design",
-  "version": "0.1.8",
-  "description": "",
+  "version": "0.1.9",
+  "description": "React UI library designed to provide a set of reusable components for building modern web applications. Inspired by Material Design 3",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "src": "src/index.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/onyxcodes/alenite-design.git"
+  },
+  "keywords": ["material-design", "md3", "react", "ui-kit", "typescript", "ui-library"],
+  "homepage": "https://onyxcodes.github.io/alenite-design/",
   "scripts": {
     "build": "rimraf --glob lib/* && webpack --node-env=production && rimraf --glob ./lib/styles/*.js",
     "test": "jest"
@@ -22,12 +28,6 @@
     "lib",
     "src",
     "README.md"
-  ],
-  "keywords": [
-    "react",
-    "material-design",
-    "ui",
-    "components"
   ],
   "devDependencies": {
     "@babel/preset-env": "^7.19.4",
