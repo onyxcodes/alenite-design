@@ -73,7 +73,7 @@ const PieChart: React.FC<PieChartProps> = (props)  => {
 			const { name = `slice-${i}`, percentage, color = (accent || "#eee"), label } = data[i];
 			// check for configuration errors
 			// percentage must be like 15, 20.5 etc..
-			if (percentage >= 0 && percentage <= 100) {
+			if (!(percentage >= 0 && percentage <= 100)) {
 				throw new Error("Configuration error. Check slice percentages")
 			}
 			const toAngle = 360 * (percentage / 100);
