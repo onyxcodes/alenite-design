@@ -2,6 +2,11 @@ import React from 'react';
 import './index.scss';
 import { setAccentStyle } from 'utils/colors';
 import { InputProps, InputRefType } from '../types';
+import Button, { ButtonProps } from 'components/Button';
+
+interface InputButtonProps extends ButtonProps {
+    style?: "inset" | "outset"
+}
 export interface TextInputProps extends InputProps {
     // TODO: Extend with other compatible types
     type: 'text' | 'email' | 'password';
@@ -9,6 +14,27 @@ export interface TextInputProps extends InputProps {
     onChange?: (arg?: string) => void;
     // TODO: Consider moving to InputProps
     size?: 's' | 'm' | 'l';
+    buttonProps?: InputButtonProps
+}
+
+const InputButton: React.FC<InputButtonProps> = (props) => {
+    const { onClick, disabled = false, 
+        iconName = "warn", style = "outset",
+        accent, accentDark, accentLight, className
+    } = props;
+
+    let inputBtnStyle = `alenite-input-button style-${style}`
+    if (className) inputBtnStyle = `${inputBtnStyle} ${className}`
+
+    return <Button
+        className={className}
+        iconName={iconName}
+        onClick={onClick}
+        disabled={disabled}
+        accent={accent}
+        accentDark={accentDark}
+        accentLight={accentLight}
+    />
 }
 const TextInput = React.forwardRef( ( props: TextInputProps, ref: React.ForwardedRef<InputRefType> ) => {
     const { 
@@ -27,6 +53,7 @@ const TextInput = React.forwardRef( ( props: TextInputProps, ref: React.Forwarde
         className,
         disabled = false,
         accent, accentDark, accentLight,
+        buttonProps
     } = props;
     
     const inputRef = React.useRef<HTMLInputElement>(null);
@@ -54,7 +81,7 @@ const TextInput = React.forwardRef( ( props: TextInputProps, ref: React.Forwarde
     if ( required ) inputClass = `${inputClass} input-required`;
 
     if ( isInvalid.length ) inputClass = `${inputClass} input-invalid`;
-
+    if ( buttonProps && (buttonProps.style || "outset") == "outset" ) inputClass = `${inputClass} trailed`;
     inputClass = `${inputClass} size-${size}`;
 
     const checkValidity = React.useCallback( () => {
@@ -99,6 +126,13 @@ const TextInput = React.forwardRef( ( props: TextInputProps, ref: React.Forwarde
     let style: {[key: string]: any} = {};
     style = setAccentStyle(style, {accent, accentLight, accentDark});
 
+    const button = React.useMemo( () => {
+        if (button) {
+            return <InputButton {...buttonProps} />
+        }
+        return <></>
+    }, [buttonProps])
+
     return React.useMemo( () => <div
         className={inputClass}
         style={style}
@@ -120,6 +154,7 @@ const TextInput = React.forwardRef( ( props: TextInputProps, ref: React.Forwarde
                 role='textbox'
                 aria-required={required}
             />
+            { button }
             { isInvalid.length ? <ul className='input-errors'>
                 { renderedErrors }
             </ul> : <></>}

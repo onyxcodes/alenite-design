@@ -77,7 +77,15 @@ const SearchBar: React.FC<SearchBarProps> = ( props ) => {
             accent={accent}
             accentDark={accentDark}
             accentLight={accentLight}
+            buttonProps={{
+                iconName: "searc",
+                onClick: doSearch,
+                disabled: btnDisabled,
+                accent, accentDark,
+                accentLight
+            }}
         />
+        {/*
         <Button
             iconName='search'
             onClick={doSearch}
@@ -85,7 +93,7 @@ const SearchBar: React.FC<SearchBarProps> = ( props ) => {
             accent={accent}
             accentDark={accentDark}
             accentLight={accentLight}
-        />
+        /> */}
     </div>, [searchbarClass, query, btnDisabled, accent, accentDark, accentLight, placeholder])
 }
 

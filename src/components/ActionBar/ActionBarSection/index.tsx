@@ -16,6 +16,7 @@ interface ActionBarAltSectionProps {
 const ActionBarAltSection: React.FC<ActionBarAltSectionProps> = ( props ) => {
     const { items, title } = props;
 
+    // TODO: In this component gotRef is not used, consider removing
     // TODO: Since it is a reusable practice, consider exporting to somewhere else
     // Remember to accept as argument additional conditions for marking the ref presence
     const [ gotRef, markRefPresence ] = React.useState(false);     // Reference to the html div containing this section

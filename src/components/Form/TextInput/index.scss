@@ -38,11 +38,23 @@
             background-color: white;
             padding: 0.5rem 1rem;
             font-size: inherit;
+            border-radius: .25rem;
             border: solid thin grey;
             // width: 100%;
             flex: 1;
-            &:focus-visible {
-                outline: 2px solid vars.$primary-color;
+            &:focus-visible, &:focus-visible + .alenite-input-button {
+                // outline: 2px solid vars.$primary-color;
+                outline: vars.$primary-color inset 1px;
+                outline-offset: 0px;
+            }
+            // class assigned when there are buttonProps with style-outset
+            &.trailed {
+                border-radius: .25rem 0 0 .25rem;
+            }
+            // When the buttonProps provided has style-outset
+            // remove left-side border radius
+            &.trailed + .alenite-input-button.style-outset {
+                border-radius: 0 .25rem .25rem 0;
             }
         }
     
