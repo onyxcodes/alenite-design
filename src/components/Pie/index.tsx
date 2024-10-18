@@ -74,7 +74,7 @@ const Slice: React.FC<SliceProps> = (props) => {
 		if (pathRef.current && labelText) {
 			return <SliceLabel text={labelText} bgPath={pathRef.current} />
 		}
-	}, [refSet, labelText])
+	}, [refSet, labelText, d])
 
 	return <>
 		<path ref={refSetter} d={d} fill={color} stroke={color}></path>
