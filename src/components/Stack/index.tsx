@@ -16,10 +16,7 @@ export interface StackProps extends ComponentProps {
 }
 
 const defaultRenderer = (elData: StackElement, index: number, isActive: boolean) => {
-    return <div style={{
-        backgroundColor: isActive ? "var(--accent-light)" : "var(--accent)",
-        padding: "5px 10px"
-    }} className={"stack-item"}>
+    return <div className={"stack-item-default"}>
         <span>{elData.name}</span>
         <div>
             {elData.content}
