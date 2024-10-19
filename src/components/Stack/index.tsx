@@ -122,9 +122,9 @@ const Stack: React.FC<StackProps> = (props) => {
         return _style;
     },[activeOffset, gap, data, accent, accentLight, accentDark]);
       
-      return <div className={stackClass} style={style}>
+    return <div className={stackClass} style={style}>
         {stackedItems}
-      </div>
+    </div>
 }
 
 export default Stack;
