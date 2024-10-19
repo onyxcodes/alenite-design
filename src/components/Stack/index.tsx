@@ -86,7 +86,7 @@ const Stack: React.FC<StackProps> = (props) => {
     const { render = defaultRenderer,
         data, direction = "vertical", gap = "20px",
         itemContainerClass, accent, accentDark, accentLight,
-        borderRadius = "extra-small"
+        borderRadius = "extra-small", className
     } = props;
     const [activeIndex, setActive] = React.useState(data.length - 1);
     const [activeOffset, setOffset] = React.useState(0);
@@ -112,6 +112,7 @@ const Stack: React.FC<StackProps> = (props) => {
     ]);
 
     let stackClass = "alenite-stack";
+    if (className) stackClass = `${stackClass} ${className}`;
 
     const style: {[key: string]: any} = React.useMemo(() => {
         let _style: {[key: string]: any} = {
