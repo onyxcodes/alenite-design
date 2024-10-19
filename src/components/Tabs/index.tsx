@@ -2,6 +2,7 @@ import React from "react";
 import "./index.scss";
 import ComponentProps from "../Component";
 import {setAccentStyle, setBorderRadius} from "../../utils"
+import Icon from "../Icon";
 
 interface TabProps extends TabConfig {
     selected: boolean;
@@ -15,7 +16,7 @@ const Tab: React.FC<TabProps> = (props) => {
     if (selected) tabClass = `${tabClass} selected`;
 
     return <div data-key={name} className={tabClass}>
-        <span>{iconName}</span>
+        { iconName && <Icon name={iconName}/>}
         <span>{label}</span>
     </div>
 }
@@ -86,7 +87,8 @@ const Tabs = React.forwardRef<TabConfig["name"] | undefined, TabsProps>((props, 
 
     const tabContent = React.useMemo(() => {
         if (content && selected) {
-            const selectedContent = content[selected]
+            const selectedContent = content[selected];
+            // TODO: Consider adding a fallback content
             return <div className="alenite-tab-content">
                 {selectedContent}
             </div>

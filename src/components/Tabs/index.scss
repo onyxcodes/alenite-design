@@ -33,7 +33,8 @@
                 align-items: center;
                 border-radius: var(--border-radius);
                 color: vars.$dark-color;
-
+                cursor: pointer;
+                
                 &.selected {
                     color: vars.$primary-color;
                 }
