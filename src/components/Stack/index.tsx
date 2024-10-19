@@ -118,7 +118,7 @@ const Stack: React.FC<StackProps> = (props) => {
           height: `calc(${activeOffset}px + ${data.length - 1} * ${gap})`,
         }
         _style = setAccentStyle(_style, { accent, accentLight, accentDark });
-        return style;
+        return _style;
     },[activeOffset, gap, data, accent, accentLight, accentDark]);
       
       return <div className={stackClass} style={style}>
