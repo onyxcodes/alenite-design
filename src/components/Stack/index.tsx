@@ -66,7 +66,7 @@ const StackItemContainer: React.FC<StackItemContainerProps> = (props) => {
 
     const style: { [key: string]: any } = React.useMemo(() => {
         let _style: { [key: string]: any } = {
-            "--position": index, "--gap": gap || "20px",
+            "--position": index, "--gap": gap,
             "--offset": `${offset || 0}px`,
             "--hasOffset": `${offset ? 1 : 0}`
         }
@@ -84,7 +84,7 @@ const StackItemContainer: React.FC<StackItemContainerProps> = (props) => {
 
 const Stack: React.FC<StackProps> = (props) => {
     const { render = defaultRenderer,
-        data, direction = "vertical", gap,
+        data, direction = "vertical", gap = "20px",
         itemContainerClass, accent, accentDark, accentLight,
         borderRadius = "extra-small"
     } = props;
@@ -100,7 +100,7 @@ const Stack: React.FC<StackProps> = (props) => {
                 className={itemContainerClass} offset={offset}
                 setOffset={setOffset} direction={direction}
                 itemData={elData} index={index} key={elData.name}
-                itemRenderer={render} setActive={setActive}
+                itemRenderer={render} setActive={setActive} gap={gap}
                 isActive={index == activeIndex} borderRadius={borderRadius}
                 elevation={index < 6 ? index as Elevation : 5}
             />
@@ -113,12 +113,17 @@ const Stack: React.FC<StackProps> = (props) => {
 
     let stackClass = "alenite-stack";
 
-    let style: { [key: string]: any } = {};
-    style = setAccentStyle(style, { accent, accentLight, accentDark });
-
-    return <div className={stackClass}>
+    const style: {[key: string]: any} = React.useMemo(() => {
+        let _style: {[key: string]: any} = {
+          height: `calc(${activeOffset}px + ${data.length - 1} * ${gap})`,
+        }
+        _style = setAccentStyle(_style, { accent, accentLight, accentDark });
+        return style;
+    },[activeOffset, gap, data, accent, accentLight, accentDark]);
+      
+      return <div className={stackClass} style={style}>
         {stackedItems}
-    </div>
+      </div>
 }
 
 export default Stack;
