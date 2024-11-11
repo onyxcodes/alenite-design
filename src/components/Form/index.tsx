@@ -7,7 +7,7 @@ interface FormProps {
     children: JSX.Element | JSX.Element[];
     name?: string;
     submit: JSX.Element;
-    onSubmit?: ( formData: {} ) => void;
+    onSubmit?: ( formData: {[key:string]: any} ) => void;
 }
 const Form = ( props: FormProps ) => {
     const { children, name, submit, onSubmit } = props;
