@@ -85,7 +85,7 @@ const Slider: React.FC<SliderProps> = ( props ) => {
         let list: JSX.Element[] = [];
         slides.forEach( (slide, i) => {
             const el = <input key={i} type="radio" name={`slider-${id}`} className={`slide-radio${i}`}
-                checked={i == checkedSlide} hidden id={`slider_${i}-${id}`}>
+                checked={i == checkedSlide} hidden id={`slider_${i}-${id}`} onChange={e => {}}>
             </input>
             list.push(el);
         });
