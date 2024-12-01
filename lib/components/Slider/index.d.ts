@@ -7,6 +7,8 @@ interface SliderProps {
     slideWrapper: (arg0: any) => JSX.Element;
     size?: 'xl' | 'l' | 'm' | 's';
     defaultChecked?: number;
+    showPagination?: boolean;
+    showNavArrows?: boolean;
 }
 declare const Slider: React.FC<SliderProps>;
 export default Slider;
