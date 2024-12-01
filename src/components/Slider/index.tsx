@@ -56,10 +56,8 @@ const Slider: React.FC<SliderProps> = ( props ) => {
             navArrowsNext: JSX.Element[] = [];
             
         let slideList = slides.map( (slide, i) => {
-            labels.push( renderLabel(i) );
             navArrowsPrevious.push( renderNavArrow(i, 'previous') );
             navArrowsNext.push( renderNavArrow(i, 'next') );
-            inputCtrls.push( renderInputCtrl(i) );
 
             return <div key={i} className="slider" id={`slide-${i}`}>
                 {slideWrapper(slide)}
@@ -71,7 +69,7 @@ const Slider: React.FC<SliderProps> = ( props ) => {
             navArrowsNext, navArrowsPrevious,
             slideList
         }
-    }, [slideWrapper, renderInputCtrl, renderLabel, renderNavArrow, slides]);
+    }, [slideWrapper, renderNavArrow, slides]);
 
     const { navArrowsNext, navArrowsPrevious, slideList } = renderElements();
 
