@@ -49,7 +49,6 @@ const Slider: React.FC<SliderProps> = ( props ) => {
         </svg> : <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
             <path d="M213.7 256L380.9 81.9c4.2-4.3 4.1-11.4-.2-15.8l-29.9-30.6c-4.3-4.4-11.3-4.5-15.5-.2L131.1 247.9c-2.2 2.2-3.2 5.2-3 8.1-.1 3 .9 5.9 3 8.1l204.2 212.7c4.2 4.3 11.2 4.2 15.5-.2l29.9-30.6c4.3-4.4 4.4-11.5.2-15.8L213.7 256z"></path>
         </svg>
-        //const targetIndex = type === 'next' ? i+1 : i-1;
         const doSetChecked = () => setChecked(i);
         return <label key={i} onClick={doSetChecked} htmlFor={`slider_${i}-${id}`} className={`numb${i}`}> 
             { arrowEl }
@@ -79,7 +78,6 @@ const Slider: React.FC<SliderProps> = ( props ) => {
     const { navArrowsNext, navArrowsPrevious, slideList } = renderElements();
 
     const labels = React.useMemo(() => {
-        if (showPagination) {
             let list: JSX.Element[] = [];
             slides.forEach( (slide, i) => {
                 const doSetChecked = () => setChecked(i);
@@ -87,8 +85,7 @@ const Slider: React.FC<SliderProps> = ( props ) => {
                 list.push(el);
             });
             return list;
-        } else return <></>
-    },[showPagination, slides, id, checkedSlide]);
+    },[slides, id, checkedSlide]);
     
     const inputCtrls = React.useMemo(() => {
         let list: JSX.Element[] = [];
@@ -201,11 +198,11 @@ const Slider: React.FC<SliderProps> = ( props ) => {
         
         <div id={`slideshow-${id}`} className={slideshowClass}>
             { inputCtrls }
-            <div className="slider-pagination f jcc my05">
+            {showPagination ? <div className="slider-pagination f jcc my05">
                 <div className="wrapper px1 py025">
                     { labels }
                 </div>
-            </div>
+            </div> : <></>}
             {showNavArrows ? <>
                 <div className="next control">
                     { navArrowsNext }
