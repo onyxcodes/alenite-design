@@ -65,7 +65,6 @@ const Slider: React.FC<SliderProps> = ( props ) => {
         });
 
         return {
-            labels, inputCtrls,
             navArrowsNext, navArrowsPrevious,
             slideList
         }
