@@ -75,7 +75,8 @@ const Slider: React.FC<SliderProps> = ( props ) => {
     const labels = React.useMemo(() => {
         let list: JSX.Element[] = [];
         slides.forEach( (slide, i) => {
-            const el = <label key={i} htmlFor={`slider_${i}-${id}`} className={`page${i}`}></label>
+            const doSetChecked = () => setChecked(i);
+            const el = <label key={i} onClick={doSetChecked} htmlFor={`slider_${i}-${id}`} className={`page${i}`}></label>
             list.push(el);
         });
         return list;
