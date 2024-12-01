@@ -4,25 +4,22 @@ import './index.scss';
 interface SliderProps {
     id: number;
     slides: any[];
-    spacing: number;
+    spacing?: number;
     slideWrapper: (arg0: any) => JSX.Element;
-    size: 'xl' | 'l' | 'm' | 's';
+    size?: 'xl' | 'l' | 'm' | 's';
+    defaultChecked?: number;
 }
 
 const Slider: React.FC<SliderProps> = ( props ) => {
-    const { id, slides, spacing, 
+    const { id, slides, spacing = 50, 
         slideWrapper,
-        size
+        size = 'xl', defaultChecked = 0
     } = props;
+    const [checkedSlide, setChecked] = React.useState<number>(defaultChecked);
 
-    const renderInputCtrl = React.useCallback( ( i: number ) => {
-        if ( i === 0 ) return <input key={i} type="radio" name={`slider-${id}`} className={`slide-radio${i}`}
-        defaultChecked hidden id={`slider_${i}-${id}`}>
-            </input>
-        else return <input key={i} type="radio" name={`slider-${id}`} className={`slide-radio${i}`}
-            hidden id={`slider_${i}-${id}`}>
-            </input>
-    }, [id]);
+    React.useEffect(() => {
+        setChecked(defaultChecked);
+    },[defaultChecked]);
 
     let slideshowClass = 'slideshow';
     switch (size) {
@@ -53,16 +50,10 @@ const Slider: React.FC<SliderProps> = ( props ) => {
         </label>
     }, [id]);
 
-    const renderLabel = React.useCallback( ( i: number ) => 
-        <label key={i} htmlFor={`slider_${i}-${id}`} className={`page${i}`}></label>
-    , [id]);
-
     const renderElements = React.useCallback( () => {
 
-        let labels: JSX.Element[] = [], 
-            navArrowsPrevious: JSX.Element[] = [],
-            navArrowsNext: JSX.Element[] = [],
-            inputCtrls: JSX.Element[] = [];
+        let navArrowsPrevious: JSX.Element[] = [],
+            navArrowsNext: JSX.Element[] = [];
             
         let slideList = slides.map( (slide, i) => {
             labels.push( renderLabel(i) );
@@ -82,8 +73,28 @@ const Slider: React.FC<SliderProps> = ( props ) => {
         }
     }, [slideWrapper, renderInputCtrl, renderLabel, renderNavArrow, slides]);
 
-    const { labels, inputCtrls, navArrowsNext, navArrowsPrevious, slideList } = renderElements()
+    const { navArrowsNext, navArrowsPrevious, slideList } = renderElements();
 
+    const labels = React.useMemo(() => {
+        let list: JSX.Element[] = [];
+        slides.forEach( (slide, i) => {
+            const el = <label key={i} htmlFor={`slider_${i}-${id}`} className={`page${i}`}></label>
+            list.push(el);
+        });
+        return list;
+    },[slides, id, checkedSlide]);
+    
+    const inputCtrls = React.useMemo(() => {
+        let list: JSX.Element[] = [];
+        slides.forEach( (slide, i) => {
+            const el = <input key={i} type="radio" name={`slider-${id}`} className={`slide-radio${i}`}
+                checked={i == checkedSlide} hidden id={`slider_${i}-${id}`}>
+            </input>
+            list.push(el);
+        });
+        return list;
+    },[slides, id, checkedSlide]);
+    
     const slideshowStyle = `
         #slideshow-${id} .slideshow-wrapper{
             grid-auto-flow: column;
