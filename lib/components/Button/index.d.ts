@@ -8,7 +8,7 @@ export interface ButtonProps extends ComponentProps {
     onClick?: (arg: any) => void;
     disabled?: boolean;
     type?: 'default' | 'primary' | 'text';
-    children?: string;
+    children?: React.ReactNode;
     shape?: 'default-shape' | 'circle';
 }
 declare const Button: React.FC<ButtonProps>;
