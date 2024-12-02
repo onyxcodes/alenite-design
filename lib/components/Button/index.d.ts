@@ -4,6 +4,7 @@ import './index.scss';
 export interface ButtonProps extends ComponentProps {
     name?: string;
     iconName?: string;
+    loading?: boolean;
     title?: string;
     onClick?: (arg: any) => void;
     disabled?: boolean;
