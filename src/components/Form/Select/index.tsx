@@ -32,12 +32,17 @@ const Select: React.FC<SelectProps> = ( props ) => {
 
     const dropdownRef = React.useRef<HTMLDivElement | null>(null);
 
+    React.useEffect(() => {
+        const selectedOpt = options.find((option) => option.selected );
+        if (selectedOpt) setSelected(selectedOpt);
+    },[options]);
+
     const doSelection = React.useCallback( (el: {
         label: string;
         value: string;
         selected?: boolean;
     }) => {
-        console.log("alenite-design: doSelection", {el, selected: selectRef.current?.value});
+        // console.log("alenite-design: doSelection", {el, selected: selectRef.current?.value});
         // Update hidden input (mirror)
         if (
             selectRef.current &&
@@ -46,12 +51,12 @@ const Select: React.FC<SelectProps> = ( props ) => {
             selectRef.current.value = el.value;
             // Update surface component
             el.selected = true;
-            console.log("doSelection: setting selection to", el);
+            // console.log("doSelection: setting selection to", el);
             setSelected(el);
         };
         // Remove focus from surface component
         dropdownRef.current?.blur();
-    }, [selectRef]);
+    }, []);
 
     let style: {[key: string]: any} = {};
     style = setAccentStyle(style, {accent, accentLight, accentDark});
