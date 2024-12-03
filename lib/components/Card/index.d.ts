@@ -5,6 +5,7 @@ import { ActionBarItemConfig } from "../ActionBar";
 export interface CardProps extends ComponentProps {
     title?: string;
     children?: React.ReactNode;
+    orientation?: "column" | "row";
     size?: [number, number];
     topActionBarItems?: ActionBarItemConfig[] | (() => ActionBarItemConfig[]);
     size_s?: [number, number];

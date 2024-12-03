@@ -1,8 +1,6 @@
 @use '../../styles/utils';
 
 .alenite-card {
-    display: flex;
-    flex-direction: column;
     overflow: clip;
     background: white;
     box-shadow: rgba(0, 0, 0, 10%) 1px 1px 1px 1px;
@@ -31,7 +29,7 @@
     .cover {
         height: inherit;
         display: flex;
-        align-items: end;
+        flex-direction: column;
         .heading {
             width: 100%;
         }

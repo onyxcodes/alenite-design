@@ -31,6 +31,7 @@ const cardSizing = ( conf: CardSizeConfig ) => {
 export interface CardProps extends ComponentProps {
     title?: string;
     children?: React.ReactNode;
+    orientation?: "column" | "row";
     // TODO: set accepted sizes, and style accordingly
     size?: [number, number];
     topActionBarItems?: ActionBarItemConfig[] | (() => ActionBarItemConfig[]);
@@ -54,7 +55,7 @@ export interface CardProps extends ComponentProps {
 const Card: React.FC<CardProps> = ( props ) => {
     const {
         title, size = [3,2], size_l = size, size_m = size_l, size_s = size_m,
-        onClick, onClose, topActionBarItems,
+        onClick, onClose, topActionBarItems, orientation = "column",
         accent, accentDark, accentLight,
         bgColor = "#999999", cover,
         className, children, headingBgAlfa = 1,
@@ -65,9 +66,12 @@ const Card: React.FC<CardProps> = ( props ) => {
         visible = true, showClose = false,
     } = props;
 
-    let cardClass = `alenite-card padding-${padding}`;
+    let cardClass = `alenite-card f padding-${padding}`;
     if (className) cardClass = `${cardClass} ${className}`;
     let coverAnim = !cover;
+
+    if (orientation == "column") cardClass = `${cardClass} fd-col`;
+    else if (orientation == "row") cardClass = `${cardClass} fd-row`;  
     
     if (cornerRadius) cardClass = `${cardClass} corner-${cornerRadius}`;
     if (coverAnim) cardClass = `${cardClass} cover-anim`;
