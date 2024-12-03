@@ -18,12 +18,10 @@ export interface CardProps extends ComponentProps {
     visible?: boolean;
     showClose?: boolean;
     bgColor?: string;
-    cover?: string;
+    headingCover?: string;
+    headingClassName?: string;
     cornerRadius?: 's' | 'm' | 'l' | false;
     padding?: 's' | 'm' | 'l';
-    headingBgAlfa?: number;
-    headingBgColor?: string;
-    headingTextAlign?: 'start' | 'center' | 'end';
 }
 declare const Card: React.FC<CardProps>;
 export default Card;

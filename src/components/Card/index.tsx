@@ -45,36 +45,35 @@ export interface CardProps extends ComponentProps {
     visible?: boolean;
     showClose?: boolean;
     bgColor?: string;
-    cover?: string;
+    headingCover?: string;
+    headingClassName?: string;
     cornerRadius?: 's' | 'm' | 'l' | false;
     padding?: 's' | 'm' | 'l';
-    headingBgAlfa?: number;
-    headingBgColor?: string;
-    headingTextAlign?: 'start' | 'center' | 'end';
 }
 const Card: React.FC<CardProps> = ( props ) => {
     const {
         title, size = [3,2], size_l = size, size_m = size_l, size_s = size_m,
         onClick, onClose, topActionBarItems, orientation = "column",
         accent, accentDark, accentLight,
-        bgColor = "#999999", cover,
-        className, children, headingBgAlfa = 1,
+        bgColor = "#999999", headingCover,
+        className, children, headingClassName,
         cornerRadius = 's', padding = 's',
-        headingBgColor = accent || "#ffffff",
-        headingTextAlign = 'start',
         transition = false,
         visible = true, showClose = false,
     } = props;
 
     let cardClass = `alenite-card f padding-${padding}`;
     if (className) cardClass = `${cardClass} ${className}`;
-    let coverAnim = !cover;
+    let coverAnim = !headingCover;
 
     if (orientation == "column") cardClass = `${cardClass} fd-col`;
     else if (orientation == "row") cardClass = `${cardClass} fd-row`;  
     
     if (cornerRadius) cardClass = `${cardClass} corner-${cornerRadius}`;
-    if (coverAnim) cardClass = `${cardClass} cover-anim`;
+    if (coverAnim) cardClass = `${cardClass} headingCover-anim`;
+
+    let _coverClass = "cover";
+    if (headingClassName)  _coverClass = `${_coverClass} ${headingClassName}`;
 
     const [mounted, mount] = React.useState(!transition);
     const [visibility, setVisibility] = React.useState(false);
@@ -104,11 +103,6 @@ const Card: React.FC<CardProps> = ( props ) => {
 
     style = setAccentStyle(style, {accent, accentLight, accentDark});
 
-    let headingStyle = {
-        background: hex2rgba(headingBgColor, headingBgAlfa),
-        textAlign: headingTextAlign
-    }
-
     /* Trace unmount of component to trigger, if provided,
      * fire onClose callback
      */
@@ -119,14 +113,14 @@ const Card: React.FC<CardProps> = ( props ) => {
     }, [mounted]);
 
     const header = React.useMemo(()=> {
-        if (cover != null || title?.length) {
-            return <div className="cover" style={{
-                backgroundRepeat: cover ? 'no-repeat' : undefined,
-                backgroundSize: cover ? 'contain' : undefined,
-                backgroundPosition: cover ? 'center' : undefined,
-                backgroundImage: cover ? "url("+cover+")" : undefined 
+        if (headingCover != null || title?.length) {
+            return <div className={_coverClass} style={{
+                backgroundRepeat: headingCover ? 'no-repeat' : undefined,
+                backgroundSize: headingCover ? 'contain' : undefined,
+                backgroundPosition: headingCover ? 'center' : undefined,
+                backgroundImage: headingCover ? "url("+headingCover+")" : undefined 
             }}>
-                <div className='alenite-card-heading' style={headingStyle}><ActionBar position='top'
+                <div className='alenite-card-heading'><ActionBar position='top'
                 items={[
                     title ? { item: <span>{title}</span>, position: 'center', key: 'modal-title', scale: false } : null,
                     ...(topActionBarItems instanceof Function && topActionBarItems() || topActionBarItems instanceof Array && topActionBarItems || []),
