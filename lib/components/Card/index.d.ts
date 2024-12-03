@@ -1,10 +1,12 @@
 import React from "react";
 import './index.scss';
 import ComponentProps from '../Component';
+import { ActionBarItemConfig } from "../ActionBar";
 export interface CardProps extends ComponentProps {
-    heading?: string;
+    title?: string;
     children?: React.ReactNode;
     size?: [number, number];
+    topActionBarItems?: ActionBarItemConfig[] | (() => ActionBarItemConfig[]);
     size_s?: [number, number];
     size_m?: [number, number];
     size_l?: [number, number];

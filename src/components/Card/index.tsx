@@ -2,6 +2,8 @@ import React from "react";
 import './index.scss';
 import {hex2rgba} from '../../utils/colors';
 import ComponentProps from '../Component';
+import ActionBar, { ActionBarItemConfig } from "../ActionBar";
+import Button from "../Button";
 import { setAccentStyle } from 'utils/colors';
 
 interface CardSizeConfig {
@@ -27,10 +29,11 @@ const cardSizing = ( conf: CardSizeConfig ) => {
 }
 
 export interface CardProps extends ComponentProps {
-    heading?: string;
+    title?: string;
     children?: React.ReactNode;
     // TODO: set accepted sizes, and style accordingly
     size?: [number, number];
+    topActionBarItems?: ActionBarItemConfig[] | (() => ActionBarItemConfig[]);
     size_s?: [number, number];
     size_m?: [number, number];
     size_l?: [number, number];
@@ -50,8 +53,8 @@ export interface CardProps extends ComponentProps {
 }
 const Card: React.FC<CardProps> = ( props ) => {
     const {
-        heading, size = [3,2], size_l = size, size_m = size_l, size_s = size_m,
-        onClick, onClose,
+        title, size = [3,2], size_l = size, size_m = size_l, size_s = size_m,
+        onClick, onClose, topActionBarItems,
         accent, accentDark, accentLight,
         bgColor = "#999999", cover,
         className, children, headingBgAlfa = 1,
@@ -112,14 +115,29 @@ const Card: React.FC<CardProps> = ( props ) => {
     }, [mounted]);
 
     const header = React.useMemo(()=> {
-        if (cover != null || heading?.length) {
+        if (cover != null || title?.length) {
             return <div className="cover" style={{
                 backgroundRepeat: cover ? 'no-repeat' : undefined,
                 backgroundSize: cover ? 'contain' : undefined,
                 backgroundPosition: cover ? 'center' : undefined,
                 backgroundImage: cover ? "url("+cover+")" : undefined 
             }}>
-                <div className='heading' style={headingStyle}>{heading}</div>
+                <div className='alenite-card-heading' style={headingStyle}><ActionBar position='top'
+                items={[
+                    title ? { item: <span>{title}</span>, position: 'center', key: 'modal-title', scale: false } : null,
+                    ...(topActionBarItems instanceof Function && topActionBarItems() || topActionBarItems instanceof Array && topActionBarItems || []),
+                    showClose ? {
+                        item: <Button
+                            shape='circle'
+                            onClick={onClose} iconName='close'
+                            accent={accent} accentDark={accentDark} accentLight={accentLight}
+                        />,
+                        position: 'right',
+                        title: 'Close',
+                        key: 'close-modal'
+                    } : null
+                ]}
+            /></div>
             </div>
         }
     }, []);
