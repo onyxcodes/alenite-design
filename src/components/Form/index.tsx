@@ -8,11 +8,15 @@ interface FormProps {
     name?: string;
     submit: JSX.Element;
     onSubmit?: ( formData: {} ) => void;
+    className: string;
 }
 const Form = ( props: FormProps ) => {
-    const { children, name, submit, onSubmit } = props;
+    const { children, name, submit, onSubmit, className } = props;
     const inputsRef = React.useRef<(InputRefType)[]>([]);
     const [ isInvalid, markInvalid ] = React.useState(false);
+
+    let _className = 'form-fields my05';
+    if (className) _className = `${_className} ${className}`;
 
     // Assures that _children is an array, event when it's not
     const _children = ([] as JSX.Element[]).concat(children);
@@ -33,10 +37,12 @@ const Form = ( props: FormProps ) => {
 
     /* Renders all given child while using callback ref to dinamically populate ref array
      */
-    const renderedChildren = React.useMemo( () => _children.map( (child, i) => {
-        return <child.type key={i} 
-            ref={(el: JSX.Element | InputRefType) => addInputRef(el,i)}
-        {...child.props} />
+    const renderedChildren = React.useMemo( () => _children.find( (child, i) => {
+        if (child.props.ref) {
+            return <child.type key={i}
+                ref={(el: JSX.Element | InputRefType) => addInputRef(el,i)}
+            {...child.props} />
+        }
     }), [_children]);
     
     const submitForm = () => {
@@ -78,7 +84,7 @@ const Form = ( props: FormProps ) => {
     }}/>
 
     return <form name={name}>
-        <div className='form-fields my05'>{renderedChildren}</div>
+        <div className={_className}>{renderedChildren}</div>
         { submitComponent }
         { isInvalid ? 
             <span className='form-error t6 my05'>Check the fields for errors</span> : null

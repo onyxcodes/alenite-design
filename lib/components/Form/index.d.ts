@@ -5,6 +5,7 @@ interface FormProps {
     name?: string;
     submit: JSX.Element;
     onSubmit?: (formData: {}) => void;
+    className: string;
 }
 declare const Form: (props: FormProps) => import("react/jsx-runtime").JSX.Element;
 export default Form;
