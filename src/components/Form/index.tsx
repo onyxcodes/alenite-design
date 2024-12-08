@@ -8,7 +8,7 @@ interface FormProps {
     name?: string;
     submit: JSX.Element;
     onSubmit?: ( formData: {} ) => void;
-    className: string;
+    className?: string;
 }
 const Form = ( props: FormProps ) => {
     const { children, name, submit, onSubmit, className } = props;
