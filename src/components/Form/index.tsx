@@ -37,12 +37,10 @@ const Form = ( props: FormProps ) => {
 
     /* Renders all given child while using callback ref to dinamically populate ref array
      */
-    const renderedChildren = React.useMemo( () => _children.find( (child, i) => {
-        if (child.props.ref) {
-            return <child.type key={i}
-                ref={(el: JSX.Element | InputRefType) => addInputRef(el,i)}
-            {...child.props} />
-        }
+    const renderedChildren = React.useMemo( () => _children.map( (child, i) => {
+        return <child.type key={i}
+            ref={(el: JSX.Element | InputRefType) => addInputRef(el,i)}
+        {...child.props} />
     }), [_children]);
     
     const submitForm = () => {
