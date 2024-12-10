@@ -6,7 +6,7 @@ export interface ButtonProps extends ComponentProps {
     iconName?: string;
     loading?: boolean;
     title?: string;
-    onClick?: (arg: any) => void;
+    onClick?: (arg?: any) => void;
     disabled?: boolean;
     type?: 'default' | 'primary' | 'text';
     children?: React.ReactNode;

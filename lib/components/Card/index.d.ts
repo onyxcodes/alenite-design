@@ -9,8 +9,8 @@ export interface CardProps extends ComponentProps {
     size?: [number, number];
     topActionBarItems?: ActionBarItemConfig[] | (() => ActionBarItemConfig[]);
     className?: string;
-    onClick?: () => void;
-    onClose?: () => void;
+    onClick?: (arg?: any) => void;
+    onClose?: (arg?: any) => void;
     transition?: boolean;
     visible?: boolean;
     showClose?: boolean;
