@@ -1,27 +1,28 @@
 import React from 'react';
-import ComponentProps from '../../Component';
 import { setAccentStyle } from 'utils/colors';
 import './index.scss';
-    
+
+import { InputProps, InputRefType } from '../types';
+
 export type SelectOption = {
     label: string;
     value: string;
     selected?: boolean;
 }
-export interface SelectProps extends ComponentProps {
+export interface SelectProps extends InputProps {
     options: SelectOption[];
     name: string;
     label?: string;
-    placeholder?: string | JSX.Element;
+    placeholder?: string;
     onChange?: ( arg: SelectOption ) => void;
 }
-const Select: React.FC<SelectProps> = ( props ) => {
+const Select = React.forwardRef( ( props: SelectProps, ref: React.ForwardedRef<InputRefType> ) => {
     const {
         options,
         name,
         label,
         placeholder,
-        onChange,
+        onChange, validator, required,
         className,
         accent, accentLight, accentDark
     } = props;
@@ -29,6 +30,35 @@ const Select: React.FC<SelectProps> = ( props ) => {
         undefined
     );
     const selectRef = React.useRef<HTMLSelectElement | null>(null);
+
+    const [ isInvalid, markInvalid ] = React.useState<(string | boolean)[]>([]);
+
+    const checkValidity = React.useCallback( () => {
+        const value = selectRef?.current?.value;
+        let errorMessages = [];
+        // If provided, perform validator method
+        if (validator) {
+            let result = validator(value!);
+            // When the validator returns true or message
+            // is invalid
+            if (result) errorMessages.push(result);
+        }
+        // When field is required and is missing value, add the error
+        if (required && !value) errorMessages.push('This field is mandatory');
+        markInvalid(errorMessages);
+        return errorMessages;
+    }, [selectRef.current, validator, required]);
+
+    /* Adds new properties to the returned ref:
+     * a method to know whether the component is valid or not.
+     * a method to trigger the field validation
+     */
+    React.useImperativeHandle(ref, () => ({
+        isInputRefType: true,
+        checkValidity,
+        getValidity: () => isInvalid,
+        current: selectRef.current
+    }), [isInvalid]);
 
     const dropdownRef = React.useRef<HTMLDivElement | null>(null);
 
@@ -110,6 +140,6 @@ const Select: React.FC<SelectProps> = ( props ) => {
         </select>
     </div>
         
-}
+});
 
 export default Select;

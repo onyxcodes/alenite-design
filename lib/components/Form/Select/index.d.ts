@@ -1,17 +1,17 @@
 import React from 'react';
-import ComponentProps from '../../Component';
 import './index.scss';
+import { InputProps, InputRefType } from '../types';
 export type SelectOption = {
     label: string;
     value: string;
     selected?: boolean;
 };
-export interface SelectProps extends ComponentProps {
+export interface SelectProps extends InputProps {
     options: SelectOption[];
     name: string;
     label?: string;
-    placeholder?: string | JSX.Element;
+    placeholder?: string;
     onChange?: (arg: SelectOption) => void;
 }
-declare const Select: React.FC<SelectProps>;
+declare const Select: React.ForwardRefExoticComponent<SelectProps & React.RefAttributes<InputRefType>>;
 export default Select;

@@ -13,7 +13,7 @@ export interface InputProps extends ComponentProps {
 }
 export type InputRefType = {
     isInputRefType: boolean;
-    current: HTMLInputElement | HTMLTextAreaElement | null;
+    current: HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement | null;
     checkValidity: () => (string | boolean)[];
     getValidity: () => (string | boolean)[];
 };
