@@ -15,7 +15,7 @@ const Form = ( props: FormProps ) => {
     const inputsRef = React.useRef<(InputRefType)[]>([]);
     const [ isInvalid, markInvalid ] = React.useState(false);
 
-    let _className = 'form-fields my05';
+    let _className = 'f fd-row fw jcb my05';
     if (className) _className = `${_className} ${className}`;
 
     // Assures that _children is an array, event when it's not

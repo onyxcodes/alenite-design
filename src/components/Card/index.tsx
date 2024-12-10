@@ -6,28 +6,6 @@ import ActionBar, { ActionBarItemConfig } from "../ActionBar";
 import Button from "../Button";
 import { setAccentStyle } from 'utils/colors';
 
-interface CardSizeConfig {
-    size: [number, number];
-    size_l: [number, number];
-    size_m: [number, number];
-    size_s: [number, number];
-}
-
-const setCardSizing = (style: {[key: string]: any}, conf: CardSizeConfig ) => {
-    return Object.assign(style, cardSizing(conf));
-}
-
-const cardSizing = ( conf: CardSizeConfig ) => {
-    const { size, size_l, size_m, size_s } = conf;
-    let style: {[key: string]: any} = {
-        "--card-size-s": `span ${size_s[1]} / span ${size_s[0]}`,
-        "--card-size-m": `span ${size_m[1]} / span ${size_m[0]}`,
-        "--card-size-l": `span ${size_l[1]} / span ${size_l[0]}`,
-        "--card-size": `span ${size[1]} / span ${size[0]}`
-    }
-    return style;
-}
-
 export interface CardProps extends ComponentProps {
     title?: string;
     children?: React.ReactNode;
@@ -35,9 +13,6 @@ export interface CardProps extends ComponentProps {
     // TODO: set accepted sizes, and style accordingly
     size?: [number, number];
     topActionBarItems?: ActionBarItemConfig[] | (() => ActionBarItemConfig[]);
-    size_s?: [number, number];
-    size_m?: [number, number];
-    size_l?: [number, number];
     className?: string;
     onClick?: () => void;
     onClose?: () => void;
@@ -52,7 +27,7 @@ export interface CardProps extends ComponentProps {
 }
 const Card: React.FC<CardProps> = ( props ) => {
     const {
-        title, size = [3,2], size_l = size, size_m = size_l, size_s = size_m,
+        title, size = [3,2],
         onClick, onClose, topActionBarItems, orientation = "column",
         accent, accentDark, accentLight,
         bgColor = "#999999", headingCover,
@@ -69,7 +44,7 @@ const Card: React.FC<CardProps> = ( props ) => {
     if (orientation == "column") cardClass = `${cardClass} fd-col`;
     else if (orientation == "row") cardClass = `${cardClass} fd-row`;  
     
-    if (cornerRadius) cardClass = `${cardClass} corner-${cornerRadius}`;
+    cardClass = `${cardClass} corner-${cornerRadius}`;
     if (coverAnim) cardClass = `${cardClass} headingCover-anim`;
 
     let _coverClass = "cover";
@@ -99,9 +74,7 @@ const Card: React.FC<CardProps> = ( props ) => {
         cardClass = `${cardClass} visible`;
     }
 
-    let style: {[key: string]: any} = cardSizing({size, size_l, size_m, size_s});
-
-    style = setAccentStyle(style, {accent, accentLight, accentDark});
+    let style: {[key: string]: any} = setAccentStyle({}, {accent, accentLight, accentDark});
 
     /* Trace unmount of component to trigger, if provided,
      * fire onClose callback

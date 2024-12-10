@@ -16,6 +16,12 @@
     border-radius: .25rem;
     box-sizing: border-box;
     width: fit-content;
+
+    @keyframes underline {
+        0% { width: 0%; background-color: var(--loading-bar-color);}
+        100% {width: 100%; background-color: transparent;}
+    }
+
     &.anim-pulse {
         @include animations.anim-pulse;
     }
@@ -31,18 +37,17 @@
             bottom: 0;
             animation: underline 2s infinite;
         }
-        @keyframes underline {
-            0% { width: 0%; background-color: black;}
-            100% {width: 100%; background-color: transparent;}
-        }
+        
     }
 
     &.btn-default {
         border: solid thin vars.$primary-color;
         color: vars.$primary-color;
+        --loading-bar-color: vars.$primary-color;
         &:hover:not(.btn-disabled), &:focus:not(.btn-disabled) {
             background-color: vars.$primary-color-light;
             border: solid thin vars.$primary-color-light;
+            --loading-bar-color: vars.$primary-color-dark;
             color: vars.$primary-color-dark;
         }
         &.btn-disabled {
@@ -53,11 +58,13 @@
     &.btn-primary {
         border: solid thin vars.$primary-color;
         background-color: vars.$primary-color;
-        color: vars.$primary-color-dark;
+        color: vars.$primary-color-light;
+        --loading-bar-color: vars.$primary-color-light;
         &:hover:not(.btn-disabled), &:focus:not(.btn-disabled) {
             border: solid thin vars.$primary-color-dark;
             background-color: vars.$primary-color-dark;
-            color: white;
+            color: vars.$primary-color-light;
+            --loading-bar-color: vars.$primary-color-light;
         }
         &.btn-disabled {
             filter: opacity(0.15);
