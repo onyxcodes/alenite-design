@@ -8,9 +8,6 @@ export interface CardProps extends ComponentProps {
     orientation?: "column" | "row";
     size?: [number, number];
     topActionBarItems?: ActionBarItemConfig[] | (() => ActionBarItemConfig[]);
-    size_s?: [number, number];
-    size_m?: [number, number];
-    size_l?: [number, number];
     className?: string;
     onClick?: () => void;
     onClose?: () => void;

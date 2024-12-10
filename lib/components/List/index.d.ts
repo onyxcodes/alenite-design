@@ -14,6 +14,8 @@ interface ListProps {
     onProcessEnd?: (arg: any) => void;
     type?: 'list' | 'grid';
     padding?: 's' | 'm' | 'l';
+    className?: string;
+    listClass?: string;
 }
 declare const List: React.FC<ListProps>;
 export default List;
