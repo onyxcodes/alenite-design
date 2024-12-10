@@ -27,7 +27,7 @@ const Select = React.forwardRef( ( props: SelectProps, ref: React.ForwardedRef<I
         accent, accentLight, accentDark
     } = props;
     const [ selected, setSelected ] = React.useState<SelectOption | undefined>(
-        undefined
+        options.find(i => i.selected)
     );
     const selectRef = React.useRef<HTMLSelectElement | null>(null);
 
@@ -47,7 +47,7 @@ const Select = React.forwardRef( ( props: SelectProps, ref: React.ForwardedRef<I
         if (required && !value) errorMessages.push('This field is mandatory');
         markInvalid(errorMessages);
         return errorMessages;
-    }, [selectRef.current, validator, required]);
+    }, [validator, required]);
 
     /* Adds new properties to the returned ref:
      * a method to know whether the component is valid or not.
