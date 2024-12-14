@@ -86,7 +86,7 @@ const Card: React.FC<CardProps> = ( props ) => {
     }, [mounted]);
 
     const header = React.useMemo(()=> {
-        if (headingCover != null || title?.length) {
+        if (headingCover != null || title?.length || topActionBarItems) {
             return <div className={_coverClass} style={{
                 backgroundRepeat: headingCover ? 'no-repeat' : undefined,
                 backgroundSize: headingCover ? 'contain' : undefined,
