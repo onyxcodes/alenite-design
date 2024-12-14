@@ -1,6 +1,6 @@
 @use '../../styles/vars.scss';
 
-form {
+.alenite-form {
     .form-error {
         color: vars.$error-color;
     }

@@ -8,15 +8,19 @@ interface FormProps {
     name?: string;
     submit: JSX.Element;
     onSubmit?: ( formData: {} ) => void;
+    fieldClass?: string;
     className?: string;
 }
 const Form = ( props: FormProps ) => {
-    const { children, name, submit, onSubmit, className } = props;
+    const { children, name, submit, onSubmit, fieldClass, className } = props;
     const inputsRef = React.useRef<(InputRefType)[]>([]);
     const [ isInvalid, markInvalid ] = React.useState(false);
 
-    let _className = 'f fd-row fw jcb my05';
-    if (className) _className = `${_className} ${className}`;
+    let _className = 'alenite-form';
+    if (className) _className = `${className} ${_className}`;
+
+    let _fieldClass = 'alenite-form-fields f fd-row fw jcb my05';
+    if (fieldClass) _fieldClass = `${_fieldClass} ${fieldClass}`;
 
     // Assures that _children is an array, event when it's not
     const _children = ([] as JSX.Element[]).concat(children);
@@ -72,19 +76,25 @@ const Form = ( props: FormProps ) => {
         }
     }
     
-    const submitComponent = !submit ? <Button 
-        type='primary' 
-        className='form-submit f-right' onClick={() => submitForm()}>
-            Submit
-    </Button> : <submit.type {...submit.props} onClick={() => {
-        submit.props.onClick && submit.props.onClick();
-        submitForm();
-    }}/>
+    const submitComponent = React.useMemo( () => {
+        if (!submit) {
+            return <Button 
+                type='primary' 
+                className='alenite-form-submit f-right' onClick={submitForm}>
+                    Submit
+            </Button>
+        } else {
+            return <submit.type {...submit.props} onClick={() => {
+                submit.props.onClick && submit.props.onClick();
+                submitForm();
+            }}/>
+        }
+    },[submit]);
 
-    return <form name={name}>
-        <div className={_className}>{renderedChildren}</div>
+    return <form name={name} className={_className}>
+        <div className={_fieldClass}>{renderedChildren}</div>
         { submitComponent }
-        { isInvalid ? 
+        { isInvalid ?
             <span className='form-error t6 my05'>Check the fields for errors</span> : null
         }
     </form>
