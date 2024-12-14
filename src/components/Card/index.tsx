@@ -111,7 +111,7 @@ const Card: React.FC<CardProps> = ( props ) => {
             /></div>
             </div>
         }
-    }, []);
+    }, [headingCover, title, topActionBarItems, accent, accentDark, accentLight, showClose, onClose]);
 
     return mounted ? <div 
         className={cardClass}
