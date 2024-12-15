@@ -8,11 +8,11 @@ interface FormProps {
     name?: string;
     submit: JSX.Element;
     onSubmit?: ( formData: {} ) => void;
-    fieldClass?: string;
+    fieldsClass?: string;
     className?: string;
 }
 const Form = ( props: FormProps ) => {
-    const { children, name, submit, onSubmit, fieldClass, className } = props;
+    const { children, name, submit, onSubmit, fieldsClass, className } = props;
     const inputsRef = React.useRef<(InputRefType)[]>([]);
     const [ isInvalid, markInvalid ] = React.useState(false);
 
@@ -20,7 +20,7 @@ const Form = ( props: FormProps ) => {
     if (className) _className = `${className} ${_className}`;
 
     let _fieldClass = 'alenite-form-fields f fd-row fw jcb my05';
-    if (fieldClass) _fieldClass = `${_fieldClass} ${fieldClass}`;
+    if (fieldsClass) _fieldClass = `${_fieldClass} ${fieldsClass}`;
 
     // Assures that _children is an array, event when it's not
     const _children = ([] as JSX.Element[]).concat(children);

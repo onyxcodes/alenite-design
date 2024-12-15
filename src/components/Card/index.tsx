@@ -13,6 +13,7 @@ export interface CardProps extends ComponentProps {
     // TODO: set accepted sizes, and style accordingly
     size?: [number, number];
     topActionBarItems?: ActionBarItemConfig[] | (() => ActionBarItemConfig[]);
+    btmActionBarItems?: ActionBarItemConfig[] | (() => ActionBarItemConfig[]);
     className?: string;
     onClick?: (arg?: any) => void;
     onClose?: (arg?: any) => void;
@@ -33,7 +34,7 @@ const Card: React.FC<CardProps> = ( props ) => {
         bgColor = "#999999", headingCover,
         className, children, headingClassName,
         cornerRadius = 's', padding = 's',
-        transition = false,
+        transition = false, btmActionBarItems,
         visible = true, showClose = false,
     } = props;
 
@@ -45,7 +46,7 @@ const Card: React.FC<CardProps> = ( props ) => {
     else if (orientation == "row") cardClass = `${cardClass} fd-row`;  
     
     cardClass = `${cardClass} corner-${cornerRadius}`;
-    if (coverAnim) cardClass = `${cardClass} headingCover-anim`;
+    if (coverAnim) cardClass = `${cardClass} cover-anim`;
 
     let _coverClass = "cover";
     if (headingClassName)  _coverClass = `${_coverClass} ${headingClassName}`;
@@ -119,7 +120,12 @@ const Card: React.FC<CardProps> = ( props ) => {
         style={style}
     >
         {header}
-        <div className="content">{children}</div>
+        <div className="alenite-card-content">{children}</div>
+        {btmActionBarItems && <ActionBar position='bottom'
+            items={[
+                ...(btmActionBarItems instanceof Function && btmActionBarItems() || btmActionBarItems instanceof Array && btmActionBarItems || [])
+            ]}
+        />}
     </div> : <></>
 }
 
